@@ -1,0 +1,103 @@
+/* credit to @ladyaeva for working the wonderful flexbox magic to get this working!! */
+@media (min-width: 767px) {
+	.flexy {
+		display: flex;
+		width: 100%;
+	}
+	.content_container, .nav_container {
+		display: flex;
+	}
+	.nav_container {
+		order: 0;
+		flex-direction: column;
+		width: 25%;
+	}
+	.content_container {
+		order: 1;
+		width: 75%;
+	}
+	.content_container .head {
+		display: none;
+	}
+	/*set this to some em value accomodating an expanded nav*/
+	.nav {
+		height: 400px;
+	}
+}
+@media (max-width: 767px) {
+	.flexy {
+		display: block;
+	}
+	.nav_container .head {
+		display: none;
+	}
+}
+body {
+	/*	height: 800px;*/
+	font: 18px "Dejavu Sans";
+	color: #000;
+	background-image:url("../img/bkg3e.png");
+}	
+h1 {
+	font-size: 2em;
+	text-align: center;
+	margin: 0px;
+}
+h2 {
+	font-size: 1.7em;
+	margin: 0px;
+}
+
+.nav, .head, .content, .foot {
+	background: #ee6a9b;
+	margin: 9px;
+	padding: 1em;
+	border: 6px solid #000;
+	border-radius: 32pt;
+}
+.nav {
+	padding: 2em;
+}
+.content {
+	padding: 2em;
+}
+.foot {
+}
+
+  ul.tree, ul.tree ul {
+     list-style-type: none;
+     background: url(../img/vline.png) repeat-y;
+     margin: 0;
+     padding: 0;
+   }
+   
+   ul.tree ul {
+     margin-left: 10px;
+   }
+
+   ul.tree li {
+     margin: 0;
+     padding: 0 12px;
+     line-height: 20px;
+     background: url(../img/node.png) no-repeat;
+   }
+
+   ul.tree li.last {
+     background: #ee689b url(../img/lastnode.png) no-repeat;
+   }
+
+   a:link {
+	   color: #000;
+    text-decoration: none;
+   }
+   a:visited {
+	   color: #000;
+    text-decoration: none;
+   }
+   a:hover {
+	   color: #fff;
+   -webkit-transition:color 300ms ease-in; 
+   }
+   a:active {
+	   color: #fff;
+   }

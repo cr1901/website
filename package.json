@@ -1,0 +1,14 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "description": "it's my website what",
+  "main": "index.js",
+  "scripts": {
+	  "start": "http-server -a 0.0.0.0 -p 8000"
+  },
+  "author": "Alice Maz",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.8.0"
+  }
+}
