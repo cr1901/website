@@ -47,6 +47,13 @@ h2 {
 	font-size: 1.7em;
 	margin: 0px;
 }
+h5 {
+	font-size: 1em;
+	margin:0px;
+}
+img {
+	border: 2px solid #000;
+}
 
 .nav, .head, .content, .foot {
 	background: #ee6a9b;

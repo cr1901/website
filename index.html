@@ -14,12 +14,12 @@
 	<body>
 		<div class="flexy">
 			<div class="content_container">
-				<div class="head">
+				<div class="head" role="header">
 					<h1>alice maz</h1>
 				</div>
 
-				<div class="content">
-					<h2>news</h2>
+				<div class="content" role="article">
+					<h2>latest</h2>
 					<br>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
 					tempor felis sed ante tempor vehicula. Vestibulum id elit nec
@@ -32,18 +32,18 @@
 				</div>
 			</div>
 
-			<div class="nav_container">
+			<div class="nav_container" role="header">
 				<div class="head">
 					<h1>alice maz</h1>
 				</div>
 
-				<div ng-controller="navctrl" class="nav">
+				<div ng-controller="navctrl" class="nav" role="navigation">
 					<ul ng-repeat="cat in cats" class="tree">
 						<li ng-class="$last ? 'last' : null">
 						<a ng-click="expand(cat)" href="javascript:void(0)">{{cat.name}}</a>
 						<ul ng-if="cat.open" ng-repeat="item in cat.items">
 							<li ng-class="$last ? 'last' : null">
-							<a href="">{{item}}</a>
+							<a href="javascript:void(0)">{{item}}</a>
 							</li>
 						</ul>
 						</li>
