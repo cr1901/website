@@ -1,0 +1,22 @@
+<h2>mysterious fav engine</h2><br/>
+<table>
+	<tr ng-repeat="tweet in tweets">
+		<td>
+			<a href="{{'https://twitter.com/intent/favorite?tweet_id='+tweet.id}}"
+				ng-mouseover="tweet.imgcheck(true)"
+				ng-mouseout="tweet.imgcheck(false)"><img class="fav" ng-src="{{tweet.img}}"></a>
+		</td>
+		<!--td><img style="border: 1px;" src="img/fav-alice.jpg"></td-->
+		<td class="favtd" align="left" ng-bind-html="tweet.txt"></td>
+	</tr>
+	<tr><td></td><td class="favtd" align="left">-</td></tr>
+	<tr>
+		<td>
+			<a href="{{'https://twitter.com/intent/favorite?tweet_id='+finalTweet.id}}"
+				ng-mouseover="finalTweet.imgcheck(true)"
+				ng-mouseout="finalTweet.imgcheck(false)"><img class="fav" ng-src="{{finalTweet.img}}"></a>
+		</td>
+		<!--td><img style="border: 1px;" src="img/fav-alice.jpg"></td-->
+		<td class="favtd" align="left" ng-bind-html="finalTweet.txt"></td>
+	</tr>
+</table>

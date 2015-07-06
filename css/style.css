@@ -1,5 +1,5 @@
 /* credit to @ladyaeva for working the wonderful flexbox magic to get this working!! */
-@media (min-width: 767px) {
+@media (min-width: 769px) {
 	.flexy {
 		display: flex;
 		width: 100%;
@@ -16,20 +16,29 @@
 		order: 1;
 		width: 75%;
 	}
+	.content {
+		width: 100%;
+	}
 	.content_container .head {
 		display: none;
 	}
 	/*set this to some em value accomodating an expanded nav*/
 	.nav {
-		height: 400px;
+		min-height: 600px;
 	}
 }
-@media (max-width: 767px) {
+@media (max-width: 769px) {
 	.flexy {
 		display: block;
 	}
 	.nav_container .head {
 		display: none;
+	}
+	.content {
+		max-width: 100%;
+	}
+	img {
+		width: 100%;
 	}
 }
 body {
@@ -53,7 +62,44 @@ h5 {
 }
 img {
 	border: 2px solid #000;
+	height: auto;
 }
+.fav {
+	border: none;
+}
+
+.favtd {
+	font-size: 0.8em;
+	padding: 5px;
+}
+
+#jokebots {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}	
+
+img.emoji {
+	border: none;
+   height: 1em;
+   width: 1em;
+   margin: 0 .05em 0 .1em;
+   vertical-align: -0.1em;
+}
+
+.biocontainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.biobox {
+	flex: 1;
+	padding: 1em;
+}
+	
 
 .nav, .head, .content, .foot {
 	background: #ee6a9b;
@@ -67,44 +113,49 @@ img {
 }
 .content {
 	padding: 2em;
+	text-align: center;
 }
 .foot {
+	text-align: center;
 }
 
-  ul.tree, ul.tree ul {
-     list-style-type: none;
-     background: url(../img/vline.png) repeat-y;
-     margin: 0;
-     padding: 0;
-   }
-   
-   ul.tree ul {
-     margin-left: 10px;
-   }
+ul.tree, ul.tree ul {
+	list-style-type: none;
+	background: url(../img/vline.png) repeat-y;
+/*	background-position: 0% 10px;*/
+	margin: 0;
+	padding: 0;
+}
 
-   ul.tree li {
-     margin: 0;
-     padding: 0 12px;
-     line-height: 20px;
-     background: url(../img/node.png) no-repeat;
-   }
+ul.tree ul {
+	margin-left: 10px;
+}
 
-   ul.tree li.last {
-     background: #ee689b url(../img/lastnode.png) no-repeat;
-   }
+ul.tree li {
+	margin: 0;
+	padding: 0 12px;
+	padding-bottom: 10px;
+	line-height: 20px;
+	background: url(../img/node.png) no-repeat;
+}
 
-   a:link {
-	   color: #000;
-    text-decoration: none;
-   }
-   a:visited {
-	   color: #000;
-    text-decoration: none;
-   }
-   a:hover {
-	   color: #fff;
-   -webkit-transition:color 300ms ease-in; 
-   }
-   a:active {
-	   color: #fff;
-   }
+ul.tree li.last {
+	background: #ee689b url(../img/lastnode.png) no-repeat;
+}
+
+a:link {
+	color: #000;
+	text-decoration: none;
+	font-weight: 600;
+}
+a:visited {
+	color: #000;
+	text-decoration: none;
+}
+a:hover {
+	color: #fff;
+	-webkit-transition:color 300ms ease-in; 
+}
+a:active {
+	color: #fff;
+}
