@@ -4,11 +4,16 @@
   "description": "it's my website what",
   "main": "index.js",
   "scripts": {
-	  "start": "http-server -a 0.0.0.0 -p 8000"
+    "start": "http-server ./src -a 0.0.0.0 -p 8000"
   },
   "author": "Alice Maz",
   "license": "MIT",
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sitemap": "^1.2.1",
     "http-server": "^0.8.0"
   }
 }

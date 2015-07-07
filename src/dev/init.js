@@ -50,7 +50,7 @@ angular.module("app",["ngRoute", "ngSanitize"])
 				ctrl: "fav.js"
 			}
 		]
-	}]
+	}];
 })
 .config(function($locationProvider) {
 	$locationProvider.html5Mode(true).hashPrefix("!");
@@ -74,9 +74,9 @@ angular.module("app",["ngRoute", "ngSanitize"])
 	})
 	.when("/etc/:etcName", {
 		templateUrl: function(args) { return "/etc/"+args.etcName+".html"; },
-		controller: "favctrl" //fix this later lol
+		controller: "favctrl" //fix this later lol zzzz
 	})
 	.otherwise({
 		redirectTo: "/"
-	})
+	});
 });

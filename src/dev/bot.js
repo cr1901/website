@@ -27,7 +27,7 @@ angular.module("app").controller("botctrl", ["$scope", function ($scope) {
 			r = Math.floor(r+0.5)%30;
 			r = (r < 0) ? r+30 : r;
 			//my additions, convert 0-29 to 0-8 then change 8 to 0
-			r = Math.floor(r/3.625)
+			r = Math.floor(r/3.625);
 			r = r & 7;
 			return r;
 		})()]);

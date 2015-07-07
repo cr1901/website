@@ -42,7 +42,6 @@ angular.module("app").controller("favctrl", ["$scope", "$sce", function ($scope,
 		});
 
 		favtweet && (favtweet.faved = true) && favtweet.imgcheck();
-		console.log(favtweet);
 	});
 
 }]);
