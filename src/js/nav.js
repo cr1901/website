@@ -13,7 +13,7 @@ angular.module("app").controller("navctrl", ["$scope", "$location", "$anchorScro
 	
 	$scope.load = function(catname, item) {
 		$location.url("/"+catname+"/"+item.url.match(/[a-zA-Z0-9-_]*/));
-		$scope.refocus();
+	//	$scope.refocus();
 		$anchorScroll();
 	};
 
