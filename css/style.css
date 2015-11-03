@@ -1,0 +1,50 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #111;
+	background: #fff;
+	font-size: 1.2em;
+	font-family: "Dejavu Sans", Courier, monospace;
+}	
+
+h1 {
+	font-size: 2em;
+	margin: 0.5em;
+}
+
+h2 {
+	font-size: 1.7em;
+}
+
+img {
+	border: 2px solid #111;
+}
+
+ul {
+	list-style-type: none;
+	font-size: 1.2em;
+}
+
+li {
+	padding-bottom: 0.5em;
+}
+
+#container {
+	float: left;
+	width: 100%;
+}
+
+#nav {
+	margin: 0 2em;
+	padding: 2em;
+	float: left;
+}
+
+#main {
+	margin: 0 2em;
+	padding: 2em;
+	float: left;
+}
