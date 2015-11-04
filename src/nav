@@ -1,0 +1,8 @@
+<div id="nav">
+	<ul>
+		<li><a href="index.html">home</a></li>
+		<li><a href="bots.html">bots</a></li>
+		<li><a href="twine.html">twine</a></li>
+		<li><a href="about.html">about</a></li>
+	</ul>
+</div>

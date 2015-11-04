@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="description" content="digital girl in an analog world">
+		<base href="/">
+		$TITLE
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+
+		<h1>alice maz</h1>
+
+		<div id="container">
+			$NAV
+			$PAGE
+		</div>
+
+	</body>
+</html>
