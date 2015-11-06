@@ -1,20 +1,39 @@
 <div id="main">
 
-<p>
-analog artist working in digital mediums and hoping for it to be the other way around someday. born on the net, damned if I don't die here. too many opinions for my own good. when the machine apocalypse comes, I'll be on their side.
-</p>
+	<p>
+	programmer. born on the net, damned if I don't die here. far too many opinions for my own good. when the machine apocalypse comes, I'll be on their side.
+	</p>
 
-<p>
-twitter: <a href="https://twitter.com/">@alicemazzy</a><br/>
-github: <a href="https://github.com/alicemaz">alicemaz</a>
-</p>
-
-<p>
-email: <a href="mailto:alice@alicemaz.com">alice@alicemaz.com</a><br/>
-pgp: <a href="https://sks-keyservers.net/pks/lookup?op=get&search=0x0BA39FEDD2A4E91F">0x0BA39FEDD2A4E91F</a><br/>
-fingerprint: 00D6 DD80 0D80 8408 C822 A66F 0BA3 9FED D2A4 E91F
-</p>
+	<table class="contact">
+		<tr>
+			<td class="contact-key"">twitter</td>
+			<td><a href="https://twitter.com/">@alicemazzy</a></td>
+		</tr>
+		<tr>
+			<td class="contact-key">github</td>
+			<td><a href="https://github.com/alicemaz">alicemaz</a></td>
+		</tr>
+		<tr>
+			<td class="contact-key">freenode</td>
+			<td>alicemaz</td>
+		</tr>
+		<tr class="gap-row"/>
+		<tr>
+			<td class="contact-key">email</td>
+			<td><a href="mailto:alice@alicemaz.com">alice@alicemaz.com</a><td/>
+		</tr>
+		<tr>
+			<td class="contact-key">pgp</td>
+			<td><a href="https://sks-keyservers.net/pks/lookup?op=get&search=0x0BA39FEDD2A4E91F">0x0BA39FEDD2A4E91F</a><td/>
+		</tr>
+		<tr>
+			<td class="contact-key">fingerprint</td>
+			<td>00D6 DD80 0D80 8408 C822 A66F 0BA3 9FED D2A4 E91F</td>
+		</tr>
+	</table>
 
 </div>
 
-<div id="side"><img alt="monochrome image of a woman (me)" src="assets/img/face-mc.png"></div><br/>
+<div id="side">
+	<img alt="brown-haired woman (me) wearing a black sleeveless dress standing in front of a brick wall" src="assets/img/profile.jpg">
+</div><br/>

@@ -59,3 +59,15 @@ p {
 	flex-shrink: 1;
 	flex-basis: content;
 }
+
+.contact td {
+	padding: 0.1em 0.5em;
+}
+
+.contact-key {
+	text-align: right;
+}
+
+.gap-row {
+	height: 0.5em;
+}
