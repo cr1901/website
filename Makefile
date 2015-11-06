@@ -6,7 +6,6 @@
 # but figure it out
 
 SHELL := /bin/bash
-THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
 domain := http://www.alicemaz.com/
 
@@ -21,6 +20,7 @@ sitemap_base := src/sitemap/base
 sitemap_block := src/sitemap/block
 sitemap_out := build/sitemap.xml
 
+pretty_datetime = date +%d\ %b\ %H:%M:%S
 last_mod = date --rfc-3339=date -r $(1)
 
 .PHONY: all clean
@@ -34,26 +34,30 @@ build/%.html: src/pages/%
 	@ln -sf ../twine/ $(dir $@)
 	$(eval name := $(notdir $<))
 	$(eval pretty_name := $(shell [[ $(name) == 'index' ]] && echo 'home' || echo $(name)))
-	@sed -e "s/\$$TITLE/<title>alice maz - $(pretty_name)<\/title>/" \
-		-e "/\$$NAV/ {r $(html_nav)" \
+	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
+		-e "/xNAV/ {r $(html_nav)" \
 		-e 'd}' \
-		-e "/\$$PAGE/ {r $<" \
+		-e "/xPAGE/ {r $<" \
 		-e 'd}' $(html_base) | \
 	sed -e "/\"$(name)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@
-	@printf "($(shell date +%d\ %b\ %H:%M:%S)) made $(notdir $@)\n"
+	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
 
 $(sitemap_out): $(html_out)
 	@rm -rf $@
+	$(eval index := build/index.html)
 	@sed -n '1,2p' $(sitemap_base) >> $@
-	$(eval loop = $(foreach twine,$(twines),\
-		sed -e 's|xLOC|$(twine)|' \
-			-e 's|xMOD|$(shell $(call last_mod,$(twine)))|' \
+	@sed -e 's/xLOC//' \
+		-e 's|xMOD|$(shell $(call last_mod,$(index)))|' \
+		-e 's/xPRIORITY/0\.8/' $(sitemap_block) >> $@
+	$(eval loop = $(foreach page,$(filter-out index.html,$(html_out) $(twines)),\
+		sed -e 's|xLOC|$(shell [[ $(dir $(page)) == 'build/' ]] && echo $(notdir $(page)) || echo $(page))|' \
+			-e 's|xMOD|$(shell $(call last_mod,$(page)))|' \
 			-e 's/xPRIORITY/0\.5/' $(sitemap_block);))
 	@eval "$(loop)" >> $@
 	@sed -n '3p' $(sitemap_base) >> $@
-	@printf "($(shell date +%d\ %b\ %H:%M:%S)) made $(notdir $@)\n"
+	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
 
 clean:
 	@rm -rf build/
-	@printf "($(shell date +%d\ %b\ %H:%M:%S)) unmade build/\n"
+	@printf "($(shell $(pretty_datetime))) unmade build/\n"
