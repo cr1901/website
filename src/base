@@ -5,7 +5,7 @@
 		<meta name="description" content="digital girl in an analog world">
 		<base href="/">
 		$TITLE
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="assets/css/style.css">
 	</head>
 	<body>
 
