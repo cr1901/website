@@ -6,17 +6,17 @@
 body {
 	color: #111;
 	background: #fff;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-family: "Dejavu Sans", Courier, monospace;
 }	
 
 h1 {
-	font-size: 2em;
-	margin: 0.5em;
+	font-size: 1.75em;
+	margin-bottom: 0.5em;
 }
 
 h2 {
-	font-size: 1.7em;
+	font-size: 1.25em;
 }
 
 img {
@@ -38,13 +38,14 @@ li {
 }
 
 #nav {
-	margin: 0 2em;
-	padding: 2em;
+	margin: 1em;
+	padding: 1em;
 	float: left;
 }
 
 #main {
-	margin: 0 2em;
-	padding: 2em;
+	margin: 1em;
+	padding: 1em;
 	float: left;
+	width: 70%;
 }
