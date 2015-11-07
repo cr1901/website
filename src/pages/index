@@ -1,5 +1,5 @@
-<div id="main">
-	<div id="homepage-img">
+<div id="main" role="main">
+	<div id="main-img">
 		<img alt="screenshot of a webpage containing a table of tweets by politicians that they had deleted, their account information, information about the tweets, and a search bar" src="assets/img/twistor.png">
 	</div>
 	<p>

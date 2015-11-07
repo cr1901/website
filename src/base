@@ -11,8 +11,11 @@
 
 		<div class="container">
 			xNAV
+
 			xPAGE
 		</div>
+
+		<div id="jumptop"><a href="xJUMPTOP">[top]</a></div>
 
 		<div id="undergirder" role="contentinfo">
 			<p>

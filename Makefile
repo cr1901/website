@@ -40,6 +40,7 @@ build/%.html: src/pages/%
 		-e 'd}' \
 		-e "/xPAGE/ {r $<" \
 		-e 'd}' \
+		-e 's/xJUMPTOP/$(notdir $@)#/' \
 		-e 's/xBOT/$(shell $(last_mod_p))/' $(html_base) | \
 	sed -e "/\"$(name)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@

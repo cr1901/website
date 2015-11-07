@@ -16,7 +16,8 @@ h1 {
 }
 
 h2 {
-	font-size: 1.25em;
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
 }
 
 img {
@@ -26,7 +27,7 @@ img {
 ul {
 	margin-left: 0.5em;
 	list-style-type: none;
-	font-size: 1.2em;
+	font-size: 1.25em;
 }
 
 li {
@@ -35,6 +36,15 @@ li {
 
 p {
 	margin: 0.5em 0;
+}
+
+dt {
+	margin: 0.25em 0;
+	font-size: 1.25em;
+}
+
+dd {
+	margin-left: 1em;
 }
 
 .container {
@@ -52,12 +62,20 @@ p {
 	flex-basis: content;
 }
 
+#side {
+	text-align: right;
+}
+
 #main {
-	margin: 2em 1em;
+	margin: 2em 1em 0;
 	padding: 1em;
 	flex-grow: 2;
 	flex-shrink: 1;
 	flex-basis: content;
+}
+
+#jumptop {
+	text-align: center;
 }
 
 #undergirder {
@@ -68,14 +86,30 @@ p {
 	font-style: italic;
 }
 
-#homepage-img {
+#main-img {
 	text-align: center;
 }
 
-#homepage-img > img {
+#main-img > img {
 	width: 75%;
 	height: auto;
 }
+
+.twine > * {
+	margin-bottom: 1em;
+}
+
+.twine > * > img {
+	display: block;
+	margin: 0 auto;
+	width: 90%;
+	height: auto;
+}
+
+.twine > * > dl {
+	margin-left: 3em;
+}
+
 
 .contact {
 	border: none;

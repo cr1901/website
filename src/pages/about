@@ -1,4 +1,4 @@
-<div id="main">
+<div id="main" role="main">
 
 	<p>
 		programmer. born on the net, damned if I don't die here. far too many opinions for my own good. when the machine apocalypse comes, I'll be on their side.
@@ -34,6 +34,6 @@
 
 </div>
 
-<div id="side">
+<div id="side" role="complementary">
 	<img alt="brown-haired woman (me) wearing a black sleeveless dress standing in front of a brick wall" src="assets/img/profile.jpg">
-</div><br/>
+</div>
