@@ -22,6 +22,7 @@ sitemap_out := build/sitemap.xml
 
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 last_mod = date --rfc-3339=date -r $(1)
+last_mod_p = date --rfc-3339=date
 
 .PHONY: all clean
 
@@ -38,7 +39,8 @@ build/%.html: src/pages/%
 		-e "/xNAV/ {r $(html_nav)" \
 		-e 'd}' \
 		-e "/xPAGE/ {r $<" \
-		-e 'd}' $(html_base) | \
+		-e 'd}' \
+		-e 's/xBOT/$(shell $(last_mod_p))/' $(html_base) | \
 	sed -e "/\"$(name)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@
 	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
@@ -50,7 +52,7 @@ $(sitemap_out): $(html_out)
 	@sed -e 's/xLOC//' \
 		-e 's|xMOD|$(shell $(call last_mod,$(index)))|' \
 		-e 's/xPRIORITY/0\.8/' $(sitemap_block) >> $@
-	$(eval loop = $(foreach page,$(filter-out index.html,$(html_out) $(twines)),\
+	$(eval loop = $(foreach page,$(filter-out $(index),$(html_out) $(twines)),\
 		sed -e 's|xLOC|$(shell [[ $(dir $(page)) == 'build/' ]] && echo $(notdir $(page)) || echo $(page))|' \
 			-e 's|xMOD|$(shell $(call last_mod,$(page)))|' \
 			-e 's/xPRIORITY/0\.5/' $(sitemap_block);))

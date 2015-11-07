@@ -1,5 +1,8 @@
 <div id="main">
-	<p>lorem ipsum etc etc</p>
-
-	<p>under construction (◡ ‿ ◡ ✿)</p>
+	<div id="homepage-img">
+		<img alt="screenshot of a webpage containing a table of tweets by politicians that they had deleted, their account information, information about the tweets, and a search bar" src="assets/img/twistor.png">
+	</div>
+	<p>
+		current project: twistor, a site that archives and makes publicly viewable deleted tweets from politicians, and a small set of programs that enables others to do likewise with arbitrary twitter feeds
+	</p>
 </div>

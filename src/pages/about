@@ -1,13 +1,13 @@
 <div id="main">
 
 	<p>
-	programmer. born on the net, damned if I don't die here. far too many opinions for my own good. when the machine apocalypse comes, I'll be on their side.
+		programmer. born on the net, damned if I don't die here. far too many opinions for my own good. when the machine apocalypse comes, I'll be on their side.
 	</p>
 
 	<table class="contact">
 		<tr>
 			<td class="contact-key"">twitter</td>
-			<td><a href="https://twitter.com/">@alicemazzy</a></td>
+			<td><a href="https://twitter.com/alicemazzy">@alicemazzy</a></td>
 		</tr>
 		<tr>
 			<td class="contact-key">github</td>

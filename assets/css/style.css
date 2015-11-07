@@ -20,7 +20,7 @@ h2 {
 }
 
 img {
-	border: 2px solid #111;
+	border: 1px solid #111;
 }
 
 ul {
@@ -60,6 +60,26 @@ p {
 	flex-basis: content;
 }
 
+#undergirder {
+	margin 1em 0;
+	padding 1em 0;
+	text-align: center;
+	font-size: 0.7em;
+	font-style: italic;
+}
+
+#homepage-img {
+	text-align: center;
+}
+
+#homepage-img > img {
+	width: 75%;
+	height: auto;
+}
+
+.contact {
+	border: none;
+}
 .contact td {
 	padding: 0.1em 0.5em;
 }

@@ -14,5 +14,12 @@
 			xPAGE
 		</div>
 
+		<div id="undergirder" role="contentinfo">
+			<p>
+				last updated xBOT<br/>
+				brought to you by make
+			</p>
+		</div>
+
 	</body>
 </html>
