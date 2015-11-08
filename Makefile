@@ -1,13 +1,26 @@
-# TODO presently my makefile does nothing if base or nav change
-# tried a few approaches but nothing yet
-# depending on build/ never triggered
-# depending on $(html_out) made the main rule unreachable
-# for now just `make clean` by hand, it's not like they'll change often
-# but figure it out
+# TODO deploy recipe
+# scp? rsync? git? think about it
+
+# TODO test recipe
+# easy, there's plenty of html validators on npm I'm sure
+# few simple custom things like make sure no xVAR in build files etc
+
+# TODO clean up duplicate code
+# need to learn depend chains
+# make_out in particular is like, 80% yankput from the main recipe
+
+# TODO strip the makefile.html link on its own page
+
+# FIXME just occurred to me... makeout breaks while true make
+# interesting consequence of the makefile having a recipe that depends on itself
+# that's... hm. I'm not sure what to do about that
+# oh man could I write a recipe to have it validate itself before touching files??
+# that would be sick, look into that
 
 SHELL := /bin/bash
 
 domain := http://www.alicemaz.com/
+makefile := Makefile
 
 html_base := src/base
 html_nav := src/nav
@@ -17,6 +30,9 @@ html_out := $(addprefix build/,$(notdir $(html_pages:%=%.html)))
 error_base := src/error
 error_pages := $(wildcard src/errors/*)
 error_out:= $(addprefix build/,$(notdir $(error_pages:%=%.html)))
+
+make_page := src/makefile
+make_out := build/makefile.html
 
 twines := $(wildcard twine/*.html)
 
@@ -30,51 +46,68 @@ last_mod_p = date --rfc-3339=date
 
 .PHONY: all clean
 
-all: $(html_out) $(error_out) $(sitemap_out)
+all: $(html_out) $(make_out) $(error_out) $(sitemap_out)
 	@true
 
-build/%.html: src/pages/%
-	@mkdir -p $(dir $@)
-	@ln -sf ../assets/ $(dir $@)
-	@ln -sf ../twine/ $(dir $@)
-	$(eval name := $(notdir $<))
-	$(eval pretty_name := $(shell [[ $(name) == 'index' ]] && echo 'home' || echo $(name)))
+$(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
+	@mkdir -p $(@D)
+	@sed -e 's/xTITLE/<title>alice maz - makefile<\/title>/' \
+		-e "/xNAV/ r $(html_nav)" \
+		-e "/xNAV/ d" \
+		-e "/xPAGE/ r $<" \
+		-e "/xPAGE/ d" \
+		-e 's/xJUMPTOP/$(@F)#/' \
+		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xMAKE/make/' $(html_base) | \
+	sed -e "/xMAKEFILE/ r $(makefile)" \
+		-e "/xMAKEFILE/ d" \
+		-e 's/^\s*//' | \
+	sed -e '/<code>/,/<\/code>/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+build/%.html: src/pages/% $(html_base) $(html_nav)
+	@mkdir -p $(@D)
+	@ln -sf ../assets/ $(@D)
+	@ln -sf ../twine/ $(@D)
+	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
 	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
-		-e "/xNAV/ {r $(html_nav)" \
-		-e 'd}' \
-		-e "/xPAGE/ {r $<" \
-		-e 'd}' \
-		-e 's/xJUMPTOP/$(notdir $@)#/' \
-		-e 's/xBOT/$(shell $(last_mod_p))/' $(html_base) | \
-	sed -e "/\"$(name)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
+		-e "/xNAV/ r $(html_nav)" \
+		-e "/xNAV/ d" \
+		-e "/xPAGE/ r $<" \
+		-e "/xPAGE/ d" \
+		-e 's/xJUMPTOP/$(@F)#/' \
+		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(html_base) | \
+	sed -e "/\"$(<F)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@
-	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-build/%.html: src/errors/%
-	@mkdir -p $(dir $@)
-	$(eval status_code := $(notdir $<))
-	@sed -e "s/xTITLE/<title>alice maz - $(status_code)<\/title>/" \
-		-e "s/xH1/<h1>$(status_code)<\/h1>/" \
-		-e "/xPAGE/ {r $<" \
-		-e 'd}' \
-		-e 's/xBOT/$(shell $(last_mod_p))/' $(error_base) | \
+build/%.html: src/errors/% $(error_base)
+	@mkdir -p $(@D)
+	@sed -e "s/xTITLE/<title>alice maz - $(<F)<\/title>/" \
+		-e "s/xH1/<h1>$(<F)<\/h1>/" \
+		-e "/xPAGE/ r $<" \
+		-e "/xPAGE/ d" \
+		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(error_base) | \
 	sed -e 's/^\s*//' > $@
-	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-$(sitemap_out): $(html_out)
+$(sitemap_out): $(html_out) $(make_out) $(twines)
 	@rm -rf $@
 	$(eval index := build/index.html)
 	@sed -n '1,2p' $(sitemap_base) >> $@
 	@sed -e 's/xLOC//' \
 		-e 's|xMOD|$(shell $(call last_mod,$(index)))|' \
 		-e 's/xPRIORITY/0\.8/' $(sitemap_block) >> $@
-	$(eval loop = $(foreach page,$(filter-out $(index),$(html_out) $(twines)),\
-		sed -e 's|xLOC|$(shell [[ $(dir $(page)) == 'build/' ]] && echo $(notdir $(page)) || echo $(page))|' \
+	$(eval loop = $(foreach page,$(filter-out $(index),$^),\
+		sed -e 's|xLOC|$(shell [[ $(dir $(page)) == 'build/' ]] && \
+			echo $(notdir $(page)) || echo $(page))|' \
 			-e 's|xMOD|$(shell $(call last_mod,$(page)))|' \
 			-e 's/xPRIORITY/0\.5/' $(sitemap_block);))
 	@eval "$(loop)" >> $@
 	@sed -n '3p' $(sitemap_base) >> $@
-	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 clean:
 	@rm -rf build/
