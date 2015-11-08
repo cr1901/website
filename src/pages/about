@@ -20,11 +20,11 @@
 		<tr class="gap-row"/>
 		<tr>
 			<td class="contact-key">email</td>
-			<td><a href="mailto:alice@alicemaz.com">alice@alicemaz.com</a><td/>
+			<td><a href="mailto:alice@alicemaz.com">alice@alicemaz.com</a></td>
 		</tr>
 		<tr>
 			<td class="contact-key">pgp</td>
-			<td><a href="https://sks-keyservers.net/pks/lookup?op=get&search=0x0BA39FEDD2A4E91F">0x0BA39FEDD2A4E91F</a><td/>
+			<td><a href="https://sks-keyservers.net/pks/lookup?op=get&search=0x0BA39FEDD2A4E91F">0x0BA39FEDD2A4E91F</a></td>
 		</tr>
 		<tr>
 			<td class="contact-key">fingerprint</td>

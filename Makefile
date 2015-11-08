@@ -4,17 +4,14 @@
 # TODO test recipe
 # easy, there's plenty of html validators on npm I'm sure
 # few simple custom things like make sure no xVAR in build files etc
+# ooo automatic spellcheck would be neat too
 
 # TODO clean up duplicate code
 # need to learn depend chains
 # make_out in particular is like, 80% yankput from the main recipe
 
-# TODO strip the makefile.html link on its own page
-
-# FIXME just occurred to me... makeout breaks while true make
-# interesting consequence of the makefile having a recipe that depends on itself
-# that's... hm. I'm not sure what to do about that
-# oh man could I write a recipe to have it validate itself before touching files??
+# TODO since the makefile now has a recipe that depends on itself...
+# could I write a recipe to have it validate itself before touching files?
 # that would be sick, look into that
 
 SHELL := /bin/bash
@@ -40,9 +37,9 @@ sitemap_base := src/sitemap/base
 sitemap_block := src/sitemap/block
 sitemap_out := build/sitemap.xml
 
+now = date --rfc-3339=date
+last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
-last_mod = date --rfc-3339=date -r $(1)
-last_mod_p = date --rfc-3339=date
 
 .PHONY: all clean
 
@@ -57,12 +54,12 @@ $(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
 		-e "/xPAGE/ r $<" \
 		-e "/xPAGE/ d" \
 		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/make/' $(html_base) | \
 	sed -e "/xMAKEFILE/ r $(makefile)" \
 		-e "/xMAKEFILE/ d" \
 		-e 's/^\s*//' | \
-	sed -e '/<code>/,/<\/code>/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
+	sed -e '/^<code>$$/,/^<\/code>$$/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: src/pages/% $(html_base) $(html_nav)
@@ -76,7 +73,7 @@ build/%.html: src/pages/% $(html_base) $(html_nav)
 		-e "/xPAGE/ r $<" \
 		-e "/xPAGE/ d" \
 		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(html_base) | \
 	sed -e "/\"$(<F)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@
@@ -88,7 +85,7 @@ build/%.html: src/errors/% $(error_base)
 		-e "s/xH1/<h1>$(<F)<\/h1>/" \
 		-e "/xPAGE/ r $<" \
 		-e "/xPAGE/ d" \
-		-e 's/xBOT/$(shell $(last_mod_p))/' \
+		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(error_base) | \
 	sed -e 's/^\s*//' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
