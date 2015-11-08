@@ -14,6 +14,10 @@ html_nav := src/nav
 html_pages := $(wildcard src/pages/*)
 html_out := $(addprefix build/,$(notdir $(html_pages:%=%.html)))
 
+error_base := src/error
+error_pages := $(wildcard src/errors/*)
+error_out:= $(addprefix build/,$(notdir $(error_pages:%=%.html)))
+
 twines := $(wildcard twine/*.html)
 
 sitemap_base := src/sitemap/base
@@ -26,7 +30,7 @@ last_mod_p = date --rfc-3339=date
 
 .PHONY: all clean
 
-all: $(html_out) $(sitemap_out)
+all: $(html_out) $(error_out) $(sitemap_out)
 	@true
 
 build/%.html: src/pages/%
@@ -44,6 +48,17 @@ build/%.html: src/pages/%
 		-e 's/xBOT/$(shell $(last_mod_p))/' $(html_base) | \
 	sed -e "/\"$(name)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
 		-e 's/^\s*//' > $@
+	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
+
+build/%.html: src/errors/%
+	@mkdir -p $(dir $@)
+	$(eval status_code := $(notdir $<))
+	@sed -e "s/xTITLE/<title>alice maz - $(status_code)<\/title>/" \
+		-e "s/xH1/<h1>$(status_code)<\/h1>/" \
+		-e "/xPAGE/ {r $<" \
+		-e 'd}' \
+		-e 's/xBOT/$(shell $(last_mod_p))/' $(error_base) | \
+	sed -e 's/^\s*//' > $@
 	@printf "($(shell $(pretty_datetime))) made $(notdir $@)\n"
 
 $(sitemap_out): $(html_out)
