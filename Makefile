@@ -63,6 +63,7 @@ build/%.html: src/pages/% $(html_base) $(html_nav)
 	@mkdir -p $(@D)
 	@ln -sf ../assets/ $(@D)
 	@ln -sf ../twine/ $(@D)
+	@ln -sf ../favicon.ico $(@D)
 	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
 	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
 		-e "/xNAV/ r $(html_nav)" \
