@@ -116,18 +116,7 @@ pre {
 	margin-left: 3em;
 }
 
-
-.contact {
-	border: none;
-}
-.contact td {
-	padding: 0.1em 0.5em;
-}
-
-.contact-key {
-	text-align: right;
-}
-
-.gap-row {
-	height: 0.5em;
+.contact > dl {
+	margin-bottom: 1em;
+	margin-left: 2em;
 }
