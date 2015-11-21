@@ -1,6 +1,3 @@
-# TODO deploy recipe
-# scp? rsync? git? think about it
-
 # TODO test recipe
 # easy, there's plenty of html validators on npm I'm sure
 # few simple custom things like make sure no xVAR in build files etc
@@ -41,7 +38,7 @@ now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
-.PHONY: all clean
+.PHONY: all deploy clean
 
 all: $(html_out) $(make_out) $(error_out) $(sitemap_out)
 	@true
@@ -105,6 +102,12 @@ $(sitemap_out): $(html_out) $(make_out) $(twines)
 	@eval "$(loop)" >> $@
 	@sed -n '3p' $(sitemap_base) >> $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+deploy:
+	@$(MAKE)
+	@rsync -rvLptWc --stats --progress --del -e ssh \
+		build/ kitchen@salacia:/usr/local/www/site
+	@printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 clean:
 	@rm -rf build/

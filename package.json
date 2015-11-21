@@ -4,7 +4,7 @@
   "description": "yet another alice site",
   "main": "index.js",
   "scripts": {
-    "server": "http-server build/ -a 0.0.0.0 -p 8000",
+    "server": "http-server build/ -a 127.0.0.1 -p 8000",
 	"make": "while true; do make; sleep 2; done"
   },
   "repository": {
