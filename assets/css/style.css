@@ -34,6 +34,10 @@ li {
 	margin: 0.25em 0;
 }
 
+ul > hr {
+	margin: 1em 3em 0.5em 0;
+}
+
 p {
 	margin: 1em 0.5em;
 }
