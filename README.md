@@ -17,8 +17,14 @@ text *bold* _ital_ [link](https://www.alicemaz.com)
 >block
 >
 >quote
+	//set up highlighter btw lol
 
-	printf("code block%c\n",'!');
-	return 0;
+	#include <stdio.h>
+
+	int main() {
+		printf("code block%c\n",'!');
+
+		return 0;
+	}
 
 ...the Aristocrats!
