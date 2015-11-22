@@ -96,10 +96,6 @@ pre {
 	font-style: italic;
 }
 
-#main-img {
-	text-align: center;
-}
-
 #main-img > img {
 	width: 75%;
 	height: auto;
@@ -116,11 +112,17 @@ pre {
 	height: auto;
 }
 
+/* TODO come up with a better way of organizing dl styles */
+
 .twine > * > dl {
 	margin-left: 3em;
 }
 
-.contact > dl {
+.contact > dl, .news > dl {
 	margin-bottom: 1em;
 	margin-left: 2em;
+}
+
+.news > dl > dd {
+	margin-bottom: 0.5em;
 }
