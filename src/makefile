@@ -1,6 +1,6 @@
 <div id="main" role="main">
 	<p>
-		I generate my website on my computer with gnu make using this makefile. it gives me all the dev conveniences I'd get from a templating engine or mvc framework but lets me serve plain documents without javascript from a traditional webserver. <code>while true; do make; sleep 2; done</code>, and it only ever builds what it needs to.
+		I generate this website on my computer with this makefile. it gives me all the dev conveniences I'd get from a templating engine or mvc framework but lets me serve plain html/css from a traditional webserver. <code>while true; do make; sleep 2; done</code>, and it only ever builds what it needs to.
 	</p>
 
 	<p>
@@ -8,7 +8,7 @@
 	</p>
 
 	<p>
-		I really like make. vi, sed, screen, I tend to gravitate towards tools older than I am. they're the survivors. I actually do like javascript, and I write a lot of it. but I think the web would be better if it were the exception rather than the rule. "back in my day, when we used the hypertext transfer protocol, we sent hypertext over it!" yadda yadda.
+		I really like make. vi, sed, screen, I tend to gravitate toward tools older than I am. they're the survivors. I don't dislike javascript, and I write a lot of it in my day-to-day. but I think the web would be better if sites asking to execute code on the user's machine were the exception rather than the rule. "when I was your age, we used the hypertext transfer protocol to send hypertext, dammit!" yadda yadda.
 	</p>
 
 	<p>

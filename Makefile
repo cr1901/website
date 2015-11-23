@@ -1,15 +1,35 @@
-# TODO test recipe
-# easy, there's plenty of html validators on npm I'm sure
-# few simple custom things like make sure no xVAR in build files etc
-# ooo automatic spellcheck would be neat too
+# TODO this could use a refactor
+# thinking a staging area/preprocessor would solve a lot of problems
+#
+# init recipe that creates build/, staging/, symlinks
+# staging recipes do simple text transforms like xVAR replacement
+# index.html, eg, assembled entirely in staging, simple search-replace
+# in other words it depends only on templates and itself, uncomplicated
+# something like makefile.html though, multiple dynamic assets combine
+# rather than a special case, run makefile.html thru same as index.html
+# leave behind xMAKEFILE, eg. then Makefile gets its own recipe
+# html escaping and fancier stuff like line numbers/syntax highlight
+# both files go to staging, build step simply combines them
+#
+# another big one, the fucking loop eval
+# trying to piece it together in-place was a mistake
+# instead of depending on all files in one recipe, go with %.html again
+# recipe writes one block per file to staging, build simply cats them
+# this also saves me from nightmares doing meat-readable sitemap
+# current design I'd have to write another one of those loop-strings
+# new design, sitemap block recipe just gets a second job to do
+#
+# will make adding a blog platform to the system much more painless too
+# staging step transforms markdown posts into html, spellcheck, etc
+# write out excerpts, xVAR, removed from full post, sliced for previews
+# builds dynamic elements like whatever blog links to blog things
+# eg "recent posts" list, category page, tag page, calendar page
+# build step inserts post into template like makefile.html does
+# inserts excerpt blocks into main/history-style "next 10" pages
 
-# TODO clean up duplicate code
-# need to learn depend chains
-# make_out in particular is like, 80% yankput from the main recipe
-
-# TODO since the makefile now has a recipe that depends on itself...
-# could I write a recipe to have it validate itself before touching files?
-# that would be sick, look into that
+# FIXME dev/prod base href?
+# w3m pukes on base href="/", so I'm hardcoding the full path
+# but this makes local testing annoying
 
 SHELL := /bin/bash
 
@@ -46,15 +66,15 @@ all: $(html_out) $(make_out) $(error_out) $(sitemap_out)
 $(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
 	@mkdir -p $(@D)
 	@sed -e 's/xTITLE/<title>alice maz - makefile<\/title>/' \
-		-e "/xNAV/ r $(html_nav)" \
-		-e "/xNAV/ d" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
+		-e "/xNAV/r $(html_nav)" \
+		-e "/xNAV/d" \
+		-e "/xPAGE/r $<" \
+		-e "/xPAGE/d" \
 		-e 's/xJUMPTOP/$(@F)#/' \
 		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/make/' $(html_base) | \
-	sed -e "/xMAKEFILE/ r $(makefile)" \
-		-e "/xMAKEFILE/ d" \
+	sed -e "/xMAKEFILE/r $(makefile)" \
+		-e "/xMAKEFILE/d" \
 		-e 's/^\s*//' | \
 	sed -e '/^<code>$$/,/^<\/code>$$/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
@@ -66,10 +86,10 @@ build/%.html: src/pages/% $(html_base) $(html_nav)
 	@ln -sf ../favicon.ico $(@D)
 	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
 	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
-		-e "/xNAV/ r $(html_nav)" \
-		-e "/xNAV/ d" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
+		-e "/xNAV/r $(html_nav)" \
+		-e "/xNAV/d" \
+		-e "/xPAGE/r $<" \
+		-e "/xPAGE/d" \
 		-e 's/xJUMPTOP/$(@F)#/' \
 		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(html_base) | \
@@ -81,8 +101,8 @@ build/%.html: src/errors/% $(error_base)
 	@mkdir -p $(@D)
 	@sed -e "s/xTITLE/<title>alice maz - $(<F)<\/title>/" \
 		-e "s/xH1/<h1>$(<F)<\/h1>/" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
+		-e "/xPAGE/r $<" \
+		-e "/xPAGE/d" \
 		-e 's/xBOT/$(shell $(now))/' \
 		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(error_base) | \
 	sed -e 's/^\s*//' > $@

@@ -57,6 +57,30 @@ pre {
 	margin: 
 }
 
+.tweet {
+	display: inline-flex;
+	padding: 0.5em;
+	border: 1px solid #111;
+	flex-direction: row;
+	flex-wrap: no-wrap;
+	align-items: flex-start;
+	width: 60%;
+}
+
+.tweet-av {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 80px;
+}
+
+.tweet-txt {
+	margin-left: 1.5em;
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: content;
+	width: 0%;
+}
+
 .container {
 	display: inline-flex;
 	flex-direction: row;
