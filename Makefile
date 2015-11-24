@@ -12,14 +12,15 @@ MAKEFLAGS := s
 domain := https://www.alicemaz.com/
 makefile := Makefile
 
-html_base := src/base
-html_nav := src/nav
-html_pages := $(wildcard src/pages/*)
-html_out := $(addprefix build/,$(notdir $(html_pages:%=%.html)))
+html_base := src/base.m4
+html_nav := src/nav.m4
+html_index := src/pages/index.m4
+html_pages := $(wildcard src/pages/*.m4)
+html_out := $(addprefix build/,$(notdir $(html_pages:%.m4=%.html)))
 
-error_base := src/error
-error_pages := $(wildcard src/errors/*)
-error_out:= $(addprefix build/,$(notdir $(error_pages:%=%.html)))
+error_base := src/error.m4
+error_pages := $(wildcard src/errors/*.m4)
+error_out:= $(addprefix build/,$(notdir $(error_pages:%.m4=%.html)))
 
 makefile_staging := staging/makefile
 make_page_staging := staging/pages/makefile.html
@@ -27,11 +28,12 @@ make_out := build/makefile.html
 
 twines := $(wildcard twine/*.html)
 
-sitemap_first := src/sitemap/first
-sitemap_last := src/sitemap/last
-sitemap_block := src/sitemap/block
+sitemap_first := src/sitemap/first.m4
+sitemap_last := src/sitemap/last.m4
+sitemap_block := src/sitemap/block.m4
 sitemap_staging := staging/sitemap/index \
-	$(addprefix staging/sitemap/pages/,$(filter-out index,$(notdir $(html_pages)))) \
+	$(addprefix staging/sitemap/pages/, \
+		$(filter-out index,$(basename $(notdir $(html_pages))))) \
 	$(addprefix staging/sitemap/,$(twines:%.html=%))
 sitemap_out := build/sitemap.xml
 
@@ -54,14 +56,14 @@ $(makefile_staging): $(makefile)
 	sed 's/</\&lt;/g;s/>/\&gt;/g;' $< > $@
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
-staging/sitemap/index: src/pages/index $(sitemap_block)
+staging/sitemap/index: $(html_index) $(sitemap_block)
 	mkdir -p $(@D)
 	m4 -D xLOC \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=daily \
 		-D xPRIORITY=0.9 $(sitemap_block) > $@
 
-staging/sitemap/pages/%: src/pages/% $(sitemap_block)
+staging/sitemap/pages/%: src/pages/%.m4 $(sitemap_block)
 	mkdir -p $(@D)
 	m4 -D xLOC=$(@F) \
 		-D xMOD=$(shell $(call last_mod,$<)) \
@@ -75,14 +77,15 @@ staging/sitemap/twine/%: twine/%.html $(sitemap_block)
 		-D xFREQ=monthly \
 		-D xPRIORITY=0.3 $(sitemap_block) > $@
 
-staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
+staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	mkdir -p $(@D)
 	
-	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && \
-		echo 'home' || ([[ $(<F) == 'makefile' ]] && \
-		echo 'make' || echo $(<F))))
-	$(eval href_name := $(shell [[ $(<F) == 'index' ]] && \
-		echo '/' || echo $(<F).html))
+	$(eval stem := $(basename $(<F)))
+	$(eval pretty_name := $(shell [[ $(stem) == 'index' ]] && \
+		echo 'home' || ([[ $(stem) == 'makefile' ]] && \
+		echo 'make' || echo $(stem))))
+	$(eval href_name := $(shell [[ $(stem) == 'index' ]] && \
+		echo '/' || echo $(stem).html))
 	
 	m4 -D xTITLE='<title>alice maz - $(pretty_name)</title>' \
 		-D xNAV=$(html_nav) \
@@ -95,11 +98,13 @@ staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
 	
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
-staging/pages/%.html: src/errors/% $(error_base)
+staging/pages/%.html: src/errors/%.m4 $(error_base)
 	mkdir -p $(@D)
 	
-	m4 -D xTITLE='<title>alice maz - $(<F)</title>' \
-		-D xH1='<h1>$(<F)</h1>' \
+	$(eval stem := $(basename $(<F)))
+	
+	m4 -D xTITLE='<title>alice maz - $(stem)</title>' \
+		-D xH1='<h1>$(stem)</h1>' \
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
