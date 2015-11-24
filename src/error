@@ -45,7 +45,7 @@
 
 		xH1
 
-		xPAGE
+		include(xPAGE)dnl
 
 		<p class="bot" role="contentinfo">
 			last updated xBOT<br/>

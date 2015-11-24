@@ -48,17 +48,15 @@ all: $(html_out) $(make_out) $(error_out) $(sitemap_out)
 
 $(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
 	@mkdir -p $(@D)
-	@sed -e 's/xTITLE/<title>alice maz - makefile<\/title>/' \
-		-e "/xNAV/ r $(html_nav)" \
-		-e "/xNAV/ d" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
-		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/make/' $(html_base) | \
+	@m4 -DxTITLE="<title>alice maz - makefile</title>" \
+		-DxNAV=$(html_nav) \
+		-DxPAGE=$< \
+		-DxJUMPTOP=$(@F)"#" \
+		-DxBOT=$(shell $(now)) \
+		-DxMAKE=make $(html_base) | \
 	sed -e "/xMAKEFILE/ r $(makefile)" \
-		-e "/xMAKEFILE/ d" \
-		-e 's/^\s*//' | \
+	 	-e "/xMAKEFILE/ d" \
+	 	-e 's/^\s*//' | \
 	sed -e '/^<code>$$/,/^<\/code>$$/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
@@ -67,26 +65,23 @@ build/%.html: src/pages/% $(html_base) $(html_nav)
 	@ln -sf ../assets/ $(@D)
 	@ln -sf ../twine/ $(@D)
 	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
-	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
-		-e "/xNAV/ r $(html_nav)" \
-		-e "/xNAV/ d" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
-		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(html_base) | \
+	@m4 -DxTITLE="<title>alice maz - "$(pretty_name)"</title>" \
+		-DxNAV=$(html_nav) \
+		-DxPAGE=$< \
+		-DxJUMPTOP=$(@F)"#" \
+		-DxBOT=$(shell $(now)) \
+		-DxMAKE="<a href=\"makefile.html\">make</a>" $(html_base) | \
 	sed -e "/\"$(<F)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
-		-e 's/^\s*//' > $@
+	 	-e 's/^\s*//' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: src/errors/% $(error_base)
 	@mkdir -p $(@D)
-	@sed -e "s/xTITLE/<title>alice maz - $(<F)<\/title>/" \
-		-e "s/xH1/<h1>$(<F)<\/h1>/" \
-		-e "/xPAGE/ r $<" \
-		-e "/xPAGE/ d" \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(error_base) | \
+	@m4 -DxTITLE="<title>alice maz - "$(<F)"</title>" \
+		-DxH1="<h1>"$(<F)"</h1>" \
+		-DxPAGE=$< \
+		-DxBOT=$(shell $(now)) \
+		-DxMAKE="<a href=\"makefile.html\">make</a>" $(error_base) | \
 	sed -e 's/^\s*//' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
@@ -94,14 +89,14 @@ $(sitemap_out): $(html_out) $(make_out) $(twines)
 	@rm -rf $@
 	$(eval index := build/index.html)
 	@sed -n '1,2p' $(sitemap_base) >> $@
-	@sed -e 's/xLOC//' \
-		-e 's|xMOD|$(shell $(call last_mod,$(index)))|' \
-		-e 's/xPRIORITY/0\.8/' $(sitemap_block) >> $@
+	@m4 -DxLOC="" \
+	-DxMOD=$(shell $(call last_mod,$(index))) \
+	-DxPRIORITY=0.8 $(sitemap_block) >> $@
 	$(eval loop = $(foreach page,$(filter-out $(index),$^),\
-		sed -e 's|xLOC|$(shell [[ $(dir $(page)) == 'build/' ]] && \
-			echo $(notdir $(page)) || echo $(page))|' \
-			-e 's|xMOD|$(shell $(call last_mod,$(page)))|' \
-			-e 's/xPRIORITY/0\.5/' $(sitemap_block);))
+		m4 -DxLOC=$(shell [[ $(dir $(page)) == 'build/' ]] && \
+			echo $(notdir $(page)) || echo $(page)) \
+			-DxMOD=$(shell $(call last_mod,$(page))) \
+			-DxPRIORITY=0.5 $(sitemap_block);))
 	@eval "$(loop)" >> $@
 	@sed -n '3p' $(sitemap_base) >> $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
