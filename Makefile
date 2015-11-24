@@ -45,7 +45,8 @@ error_base := src/error
 error_pages := $(wildcard src/errors/*)
 error_out:= $(addprefix build/,$(notdir $(error_pages:%=%.html)))
 
-make_page := src/makefile
+makefile_staging := staging/makefile
+make_page_staging := staging/pages/makefile.html
 make_out := build/makefile.html
 
 twines := $(wildcard twine/*.html)
@@ -59,54 +60,48 @@ last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
 .PHONY: all deploy clean
+.INTERMEDIATE: $(make_page_staging) $(makefile_staging)
 
-all: $(html_out) $(make_out) $(error_out) $(sitemap_out)
+all: $(html_out) $(error_out)
 	@true
 
-$(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
+$(makefile_staging): $(makefile)
 	@mkdir -p $(@D)
-	@sed -e 's/xTITLE/<title>alice maz - makefile<\/title>/' \
-		-e "/xNAV/r $(html_nav)" \
-		-e "/xNAV/d" \
-		-e "/xPAGE/r $<" \
-		-e "/xPAGE/d" \
-		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/make/' $(html_base) | \
-	sed -e "/xMAKEFILE/r $(makefile)" \
-		-e "/xMAKEFILE/d" \
-		-e 's/^\s*//' | \
-	sed -e '/^<code>$$/,/^<\/code>$$/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	@sed 's/</\&lt;/g;s/>/\&gt;/g;' $< > $@
+	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
-build/%.html: src/pages/% $(html_base) $(html_nav)
+staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
 	@mkdir -p $(@D)
-	@ln -sf ../assets/ $(@D)
-	@ln -sf ../twine/ $(@D)
-	@ln -sf ../favicon.ico $(@D)
-	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
-	@sed -e "s/xTITLE/<title>alice maz - $(pretty_name)<\/title>/" \
-		-e "/xNAV/r $(html_nav)" \
-		-e "/xNAV/d" \
-		-e "/xPAGE/r $<" \
-		-e "/xPAGE/d" \
-		-e 's/xJUMPTOP/$(@F)#/' \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(html_base) | \
-	sed -e "/\"$(<F)\.html\"/c\<li>"$(pretty_name)"<\/li>" \
+	
+	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && \
+		echo 'home' || ([[ $(<F) == 'makefile' ]] && \
+		echo 'make' || echo $(<F))))
+	$(eval href_name := $(shell [[ $(<F) == 'index' ]] && \
+		echo '/' || echo $(<F).html))
+	
+	@m4 -D xTITLE='<title>alice maz - $(pretty_name)</title>' \
+		-D xNAV=$(html_nav) \
+		-D xPAGE=$< \
+		-D xJUMPTOP=$(@F)'#' \
+		-D xBOT=$(shell $(now)) \
+		-D xMAKE='<a href="makefile.html">make</a>' $(html_base) | \
+	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|$(pretty_name)|g' \
 		-e 's/^\s*//' > $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	
+	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
-build/%.html: src/errors/% $(error_base)
+staging/pages/%.html: src/errors/% $(error_base)
 	@mkdir -p $(@D)
-	@sed -e "s/xTITLE/<title>alice maz - $(<F)<\/title>/" \
-		-e "s/xH1/<h1>$(<F)<\/h1>/" \
-		-e "/xPAGE/r $<" \
-		-e "/xPAGE/d" \
-		-e 's/xBOT/$(shell $(now))/' \
-		-e 's/xMAKE/<a href="makefile\.html">make<\/a>/' $(error_base) | \
+	
+	@m4 -D xTITLE='<title>alice maz - $(<F)</title>' \
+		-D xH1='<h1>$(<F)</h1>' \
+		-D xPAGE=$< \
+		-D xJUMPTOP=$(@F)'#' \
+		-D xBOT=$(shell $(now)) \
+		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) | \
 	sed -e 's/^\s*//' > $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	
+	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 $(sitemap_out): $(html_out) $(make_out) $(twines)
 	@rm -rf $@
@@ -124,6 +119,19 @@ $(sitemap_out): $(html_out) $(make_out) $(twines)
 	@sed -n '3p' $(sitemap_base) >> $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
+$(make_out): $(make_page_staging) $(makefile_staging)
+	@mkdir -p $(@D)
+	@m4 -D xMAKEFILE=$(makefile_staging) $< > $@
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+build/%.html: staging/pages/%.html
+	@mkdir -p $(@D)
+	@ln -sf ../assets/ $(@D)
+	@ln -sf ../twine/ $(@D)
+	@ln -sf ../favicon.ico $(@D)
+	@cp -r $< $@
+	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
 deploy:
 	@$(MAKE)
 	@rsync -rvLptWc --stats --progress --del -e ssh \
@@ -131,5 +139,6 @@ deploy:
 	@printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 clean:
+	@rm -rf staging/
 	@rm -rf build/
 	@printf "($(shell $(pretty_datetime))) unmade build/\n"

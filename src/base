@@ -10,9 +10,9 @@
 	<body>
 
 		<div class="container">
-			xNAV
+			include(xNAV)dnl
 
-			xPAGE
+			include(xPAGE)dnl
 		</div>
 
 		<div id="jumptop"><a href="xJUMPTOP">[top]</a></div>
