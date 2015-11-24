@@ -6,11 +6,8 @@
 # build step inserts post into template like makefile.html does
 # inserts excerpt blocks into main/history-style "next 10" pages
 
-# FIXME dev/prod base href?
-# w3m pukes on base href="/", so I'm hardcoding the full path
-# but this makes local testing annoying
-
 SHELL := /bin/bash
+MAKEFLAGS := s
 
 domain := https://www.alicemaz.com/
 makefile := Makefile
@@ -42,11 +39,10 @@ now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
-.PHONY: all deploy clean
+.PHONY: all localhref remotehref deploy clean
 .INTERMEDIATE: $(make_page_staging) $(makefile_staging)
 
 all: $(html_out) $(error_out) $(sitemap_out)
-	@true
 
 
 ###########
@@ -54,33 +50,33 @@ all: $(html_out) $(error_out) $(sitemap_out)
 ###########
 
 $(makefile_staging): $(makefile)
-	@mkdir -p $(@D)
-	@sed 's/</\&lt;/g;s/>/\&gt;/g;' $< > $@
-	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
+	mkdir -p $(@D)
+	sed 's/</\&lt;/g;s/>/\&gt;/g;' $< > $@
+	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 staging/sitemap/index: src/pages/index $(sitemap_block)
-	@mkdir -p $(@D)
-	@m4 -D xLOC \
+	mkdir -p $(@D)
+	m4 -D xLOC \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=daily \
 		-D xPRIORITY=0.9 $(sitemap_block) > $@
 
 staging/sitemap/pages/%: src/pages/% $(sitemap_block)
-	@mkdir -p $(@D)
-	@m4 -D xLOC=$(@F) \
+	mkdir -p $(@D)
+	m4 -D xLOC=$(@F) \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=daily \
 		-D xPRIORITY=0.7 $(sitemap_block) > $@
 
 staging/sitemap/twine/%: twine/%.html $(sitemap_block)
-	@mkdir -p $(@D)
-	@m4 -D xLOC=$< \
+	mkdir -p $(@D)
+	m4 -D xLOC=$< \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=monthly \
 		-D xPRIORITY=0.3 $(sitemap_block) > $@
 
 staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
-	@mkdir -p $(@D)
+	mkdir -p $(@D)
 	
 	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && \
 		echo 'home' || ([[ $(<F) == 'makefile' ]] && \
@@ -88,7 +84,7 @@ staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
 	$(eval href_name := $(shell [[ $(<F) == 'index' ]] && \
 		echo '/' || echo $(<F).html))
 	
-	@m4 -D xTITLE='<title>alice maz - $(pretty_name)</title>' \
+	m4 -D xTITLE='<title>alice maz - $(pretty_name)</title>' \
 		-D xNAV=$(html_nav) \
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
@@ -97,12 +93,12 @@ staging/pages/%.html: src/pages/% $(html_base) $(html_nav)
 	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|$(pretty_name)|g' \
 		-e 's/^\s*//' > $@
 	
-	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
+	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 staging/pages/%.html: src/errors/% $(error_base)
-	@mkdir -p $(@D)
+	mkdir -p $(@D)
 	
-	@m4 -D xTITLE='<title>alice maz - $(<F)</title>' \
+	m4 -D xTITLE='<title>alice maz - $(<F)</title>' \
 		-D xH1='<h1>$(<F)</h1>' \
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
@@ -110,7 +106,7 @@ staging/pages/%.html: src/errors/% $(error_base)
 		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) | \
 	sed -e 's/^\s*//' > $@
 	
-	@printf "($(shell $(pretty_datetime))) staged $(@F)\n"
+	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 
 ###########
@@ -118,29 +114,48 @@ staging/pages/%.html: src/errors/% $(error_base)
 ###########
 
 $(sitemap_out): $(sitemap_first) $(sitemap_staging) $(sitemap_last)
-	@cat $^ > $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	cat $^ > $@
+	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 $(make_out): $(make_page_staging) $(makefile_staging)
-	@mkdir -p $(@D)
-	@m4 -D xMAKEFILE=$(makefile_staging) $< > $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	mkdir -p $(@D)
+	m4 -D xMAKEFILE=$(makefile_staging) $< > $@
+	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: staging/pages/%.html
-	@mkdir -p $(@D)
-	@ln -sf ../assets/ $(@D)
-	@ln -sf ../twine/ $(@D)
-	@ln -sf ../favicon.ico $(@D)
-	@cp -r $< $@
-	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
+	mkdir -p $(@D)
+	ln -sf ../assets/ $(@D)
+	ln -sf ../twine/ $(@D)
+	ln -sf ../favicon.ico $(@D)
+	cp -r $< $@
+	printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+
+###########
+#  tasks  #
+###########
+
+localhref:
+	for f in build/*.html; do \
+		sed -i 's|^\(<base href="\)$(domain)\(">\)$$|\1/\2|' $$f; \
+		done
+	printf "($(shell $(pretty_datetime))) base href to local\n"
+
+remotehref:
+	for f in build/*.html; do \
+		sed -i 's|^\(<base href="\)/\(">\)$$|\1$(domain)\2|' $$f; \
+		done
+	printf "($(shell $(pretty_datetime))) base href to remote\n"
 
 deploy:
-	@$(MAKE)
-	@rsync -rvLptWc --stats --progress --del -e ssh \
+	$(MAKE)
+	$(MAKE) remotehref
+	rsync -rvLptWc --stats --progress --del -e ssh \
 		build/ kitchen@salacia:/usr/local/www/site
-	@printf "($(shell $(pretty_datetime))) deployed build/\n"
+	printf "($(shell $(pretty_datetime))) deployed build/\n"
+	$(MAKE) localhref
 
 clean:
-	@rm -rf staging/
-	@rm -rf build/
-	@printf "($(shell $(pretty_datetime))) unmade build/\n"
+	rm -rf staging/
+	rm -rf build/
+	printf "($(shell $(pretty_datetime))) unmade build/\n"
