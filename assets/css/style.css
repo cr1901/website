@@ -179,3 +179,13 @@ pre {
 	bottom: 5px;
 	right: 5px;
 }
+
+.gameboard {
+	border: none;
+}
+
+.gameboard tr > td > img {
+	border: none;
+	width: 36px;
+	height: auto;
+}

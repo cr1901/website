@@ -147,7 +147,7 @@ $(make_out): $(make_page_staging) $(makefile_staging)
 	m4 -D xMAKEFILE=$(makefile_staging) $< > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-$(bots_out): $(tweet_staging) $(bot_page_staging)
+$(bots_out): $(tweet_staging) $(bot_page_staging) $(bot_gameboard)
 	mkdir -p $(@D)
 	m4 -D xGAMEBOARD=$(bot_gameboard) -I $(<D) $(bot_page_staging) > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"

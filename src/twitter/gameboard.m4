@@ -1,4 +1,4 @@
-<table>
+<table class="gameboard">
 	<tr>
 		<td><img src="assets/img/emoji/2b1c.png"></td>
 		<td><img src="assets/img/emoji/2b1c.png"></td>
