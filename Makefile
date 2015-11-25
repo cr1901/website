@@ -40,6 +40,9 @@ sitemap_out := build/sitemap.xml
 tweet_base := src/twitter/base.m4
 tweet_pages := $(wildcard src/twitter/tweets/*.m4)
 tweet_staging := $(addprefix staging/tweets/,$(basename $(notdir $(tweet_pages))))
+bot_page_staging := staging/pages/bots.html
+bot_gameboard := src/twitter/gameboard.m4
+bots_out := build/bots.html
 
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
@@ -90,7 +93,8 @@ staging/tweets/%: src/twitter/tweets/%.m4 $(tweet_base)
 	mkdir -p $(@D)
 	$(eval acct := $(shell echo '$<' | \
 		sed -e 's/\<tweets\>/accounts/' -e 's/-[0-9]\+//'))
-	m4 -D xACCT=$(acct) -D xTWEET=$< $(tweet_base) > $@
+	m4 -D xACCT=$(acct) -D xTWEET=$< $(tweet_base) | \
+	sed -e 's/^\s*//' > $@
 
 staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	mkdir -p $(@D)
@@ -141,6 +145,11 @@ $(sitemap_out): $(sitemap_first) $(sitemap_staging) $(sitemap_last)
 $(make_out): $(make_page_staging) $(makefile_staging)
 	mkdir -p $(@D)
 	m4 -D xMAKEFILE=$(makefile_staging) $< > $@
+	printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+$(bots_out): $(tweet_staging) $(bot_page_staging)
+	mkdir -p $(@D)
+	m4 -D xGAMEBOARD=$(bot_gameboard) -I $(<D) $(bot_page_staging) > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: staging/pages/%.html

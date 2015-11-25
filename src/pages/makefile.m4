@@ -1,3 +1,4 @@
+define(`xMAKEFILE', ``include(xMAKEFILE)'')dnl
 <div id="main" role="main">
 	<p>
 		I generate this website on my computer with this makefile. it gives me all the dev conveniences I'd get from a templating engine or mvc framework but lets me serve plain html/css from a traditional webserver. <code>while true; do make; sleep 2; done</code>, and it only ever builds what it needs to.
@@ -17,7 +18,6 @@
 
 	<pre>
 		<code>
-			define(`xMAKEFILE', ``include(xMAKEFILE)'')dnl
 			xMAKEFILE
 		</code>
 	</pre>

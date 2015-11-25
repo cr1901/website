@@ -57,47 +57,6 @@ pre {
 	margin: 
 }
 
-.tweet {
-	display: inline-flex;
-	padding: 0.5em;
-	border: 1px solid #111;
-	flex-direction: row;
-	flex-wrap: no-wrap;
-	align-items: flex-start;
-	width: 60%;
-}
-
-.tweet-av {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: 60px;
-}
-
-.tweet-av > img {
-	width: 100%;
-	height: auto;
-}
-
-.tweet-txt {
-	margin-left: 1em;
-	flex-grow: 1;
-	flex-shrink: 0;
-	flex-basis: content;
-	width: 0%;
-}
-
-.tweet-head {
-	font-size: 0.8em;
-}
-
-.tweet-head > a {
-	font-style: italic;
-}
-
-.tweet-link {
-	float: right;
-}
-
 .container {
 	display: inline-flex;
 	flex-direction: row;
@@ -166,4 +125,57 @@ pre {
 
 .news > dl > dd {
 	margin-bottom: 0.5em;
+}
+
+.bots > * {
+	margin-bottom: 1em;
+}
+
+.bots > div > dl > dd {
+	margin-bottom: 0.5em;
+}
+
+.tweet {
+	position: relative;
+	display: inline-flex;
+	padding: 0.5em;
+	border: 1px solid #111;
+	flex-direction: row;
+	flex-wrap: no-wrap;
+	align-items: flex-start;
+	width: 60%;
+}
+
+.tweet-av {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 50px;
+}
+
+.tweet-av > img {
+	width: 100%;
+	height: auto;
+}
+
+.tweet-txt {
+	margin-left: 1em;
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: content;
+	word-wrap: break-word;
+	width: 0%;
+}
+
+.tweet-head {
+	font-size: 0.8em;
+}
+
+.tweet-head > a {
+	font-style: italic;
+}
+
+.tweet-link {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
