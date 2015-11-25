@@ -37,14 +37,23 @@ sitemap_staging := staging/sitemap/index \
 	$(addprefix staging/sitemap/,$(twines:%.html=%))
 sitemap_out := build/sitemap.xml
 
+tweet_base := src/twitter/base.m4
+tweet_pages := $(wildcard src/twitter/tweets/*.m4)
+tweet_staging := $(addprefix staging/tweets/,$(basename $(notdir $(tweet_pages))))
+
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
-.PHONY: all localhref remotehref deploy clean
+.PHONY: all localhref remotehref deploy unstage unbuild clean
 .INTERMEDIATE: $(make_page_staging) $(makefile_staging)
 
-all: $(html_out) $(error_out) $(sitemap_out)
+
+###########
+#  make   #
+###########
+
+all: $(html_out) $(error_out) $(sitemap_out) $(tweet_staging)
 
 
 ###########
@@ -76,6 +85,12 @@ staging/sitemap/twine/%: twine/%.html $(sitemap_block)
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=monthly \
 		-D xPRIORITY=0.3 $(sitemap_block) > $@
+
+staging/tweets/%: src/twitter/tweets/%.m4 $(tweet_base)
+	mkdir -p $(@D)
+	$(eval acct := $(shell echo '$<' | \
+		sed -e 's/\<tweets\>/accounts/' -e 's/-[0-9]\+//'))
+	m4 -D xACCT=$(acct) -D xTWEET=$< $(tweet_base) > $@
 
 staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	mkdir -p $(@D)
@@ -119,6 +134,7 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 ###########
 
 $(sitemap_out): $(sitemap_first) $(sitemap_staging) $(sitemap_last)
+	mkdir -p $(@D)
 	cat $^ > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
@@ -160,7 +176,14 @@ deploy:
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 	$(MAKE) localhref
 
-clean:
+unstage:
 	rm -rf staging/
+	printf "($(shell $(pretty_datetime))) unmade staging/\n"
+
+unbuild:
 	rm -rf build/
 	printf "($(shell $(pretty_datetime))) unmade build/\n"
+
+clean:
+	$(MAKE) unstage
+	$(MAKE) unbuild

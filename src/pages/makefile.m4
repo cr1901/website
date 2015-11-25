@@ -17,7 +17,7 @@
 
 	<pre>
 		<code>
-			define(`xMAKEFILE', ``include(xMAKEFILE)'')
+			define(`xMAKEFILE', ``include(xMAKEFILE)'')dnl
 			xMAKEFILE
 		</code>
 	</pre>

@@ -1,22 +1,24 @@
 <div id="main">
 
 	<div class="tweet">
-		<div class="tweet-img">
-			<img alt="arrrr" src="assets/img/barbossa.jpg"><br/>
+		<div class="tweet-av">
+			<img alt="arrrr" src="assets/img/believebarbossa.jpg"><br/>
 		</div>
 		<div class="tweet-txt">
-			<b>Captain Barbossa</b> <i>@believebarbossa</i><br/>
-			You best start believing in patriarchal frameworks. You're in one!<br/>
-			<div style="float:right;"><a href="https://twitter.com/believebarbossa/status/569098241100386304">&#x21aa;</a></div>
+			<div class="tweet-head">
+				<strong>Captain Barbossa</strong> <a href="https://twitter.com/believebarbossa">@believebarbossa</a>
+			</div>
+			You best start believing in patriarchal frameworks. You're in one!
+			<div class="tweet-link"><a href="https://twitter.com/believebarbossa/status/569098241100386304">&#x21aa;</a></div>
 		</div>
 	</div>
 
 	<div class="tweet">
-		<div class="tweet-img">
+		<div class="tweet-av">
 			<img alt="arrrr" src="assets/img/barbossa.jpg"><br/>
 		</div>
 		<div class="tweet-txt">
-			<b>Captain Barbossa</b> <i>@believebarbossa</i><br/>
+			<div class="tweet-head"><b>Captain Barbossa</b> <i>@believebarbossa</i><br/></div>
 			You best start believing in german morphologies. You're in one!<br/>
 			<div style="float:right;"><a href="https://twitter.com/believebarbossa/status/667512699975258112">&#x21aa;</a></div>
 		</div>
