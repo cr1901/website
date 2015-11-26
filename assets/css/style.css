@@ -7,6 +7,7 @@ body {
 	color: #111;
 	background: #fff;
 	font-size: 1em;
+	line-height: 1.4em;
 	font-family: "Dejavu Sans", Courier, monospace;
 }	
 
@@ -24,17 +25,17 @@ img {
 	border: 1px solid #111;
 }
 
-ul {
+#nav > ul, #side > ul {
 	margin-left: 0.5em;
 	list-style-type: none;
 	font-size: 1.25em;
 }
 
-li {
+#nav > ul > li, #side > ul > li {
 	margin: 0.25em 0;
 }
 
-ul > hr {
+#nav > ul > hr, #side > ul > hr {
 	margin: 1em 3em 0.5em 0;
 }
 
@@ -93,6 +94,7 @@ pre {
 	padding 1em 0;
 	text-align: center;
 	font-size: 0.7em;
+	line-height: 1.1em;
 	font-style: italic;
 }
 
@@ -124,7 +126,7 @@ pre {
 }
 
 .news > dl > dd {
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 .bots > * {
@@ -132,7 +134,7 @@ pre {
 }
 
 .bots > div > dl > dd {
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 .tweet {
@@ -180,11 +182,11 @@ pre {
 	right: 5px;
 }
 
-.gameboard {
+.gameboard, .eclipse {
 	border: none;
 }
 
-.gameboard tr > td > img {
+.gameboard tr > td > img, .eclipse tr > td > img {
 	border: none;
 	width: 36px;
 	height: auto;

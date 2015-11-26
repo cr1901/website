@@ -49,14 +49,14 @@ last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
 .PHONY: all localhref remotehref deploy unstage unbuild clean
-.INTERMEDIATE: $(make_page_staging) $(makefile_staging)
+.INTERMEDIATE: $(make_page_staging) $(makefile_staging) $(bot_page_staging) $(tweet_staging)
 
 
 ###########
 #  make   #
 ###########
 
-all: $(html_out) $(error_out) $(sitemap_out) $(tweet_staging)
+all: $(html_out) $(error_out) $(sitemap_out)
 
 
 ###########
