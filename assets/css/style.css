@@ -188,6 +188,13 @@ pre {
 	right: 5px;
 }
 
+.git-icon {
+    border: none;
+    margin-bottom: -4px;
+    height: 1em;
+    width: auto;
+}
+
 .gameboard, .eclipse {
 	border: none;
 }

@@ -49,7 +49,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xMISS5
 		
 		<dl>
-			<dt><a href="https://twitter.com/botmistress">@botmistress</a></dt>
+			<dt><a href="https://twitter.com/botmistress">@botmistress</a> ~ <a href="https://git.alicemaz.com/public/?p=mistress.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>presently dormant. on her I pin my hopes. kind of a random account that I use for testing purposes and various experiments. ideally the goal is for her to be an extensible system I can plug functionality into until she achieves self-awareness. shodan v0.0.1. near the top of my reading list are "a field guide to genetic programming" and "handbook of neuroevolution through erlang". we will see how far I can take it.</dd>
 			<dd>originally, she was a newbie project, a mess of state and switch-cases all inside a single function. I could tweet at her, things like "make henge follow me" or "make barbossa delete $ID", and she would make the api calls on their behalf. the codebase was a horrible mess, but it worked.</dd>
 			<dd>a couple months later I decided I'd learned enough to throw it away and design a system with clean interfaces and modular functionality. as it turned out, I had not learned enough. I ended up with an even more horrible mess, and it didn't work. but <em>now</em> (she says) I <em>have</em> learned enough to at least design something that I can more readily improve when I learn more. so that's in the cards.</dd>
@@ -67,7 +67,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xHENGE
 		
 		<dl>
-			<dt><a href="https://twitter.com/digital_henge">@digital_henge</a></dt>
+			<dt><a href="https://twitter.com/digital_henge">@digital_henge</a> ~ <a href="https://git.alicemaz.com/public/?p=digital_henge.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>a quiet, serene thing. tweets the lunar precession, solstices, equinoxes, and intervals of the zodiac. people have commented on her being a reminder of the physical on the net and a gentle, reliable rhythm on a noisy, inconstant medium. one of my favorite creations.</dd>
 		</dl>
 	</div>
@@ -79,7 +79,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xNOUNS3
 		
 		<dl>
-			<dt><a href="https://twitter.com/plural_fauna">@plural_fauna</a></dt>
+			<dt><a href="https://twitter.com/plural_fauna">@plural_fauna</a> ~ <a href="https://git.alicemaz.com/public/?p=plural_fauna.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>ex-jokebot. originally this was @omfg_animals, a bot that tweeted ~unbelievable~ animal facts, but with the animals swapped out, along with the occasional "a group of $ANIMALs is called a $NOUN". the former got old quick, but the latter was more often poetic than amusing, so I changed the template sentence, changed one line of code, and made this. vastly improved.</dd>
 		</dl>
 	</div>
@@ -92,7 +92,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xGOOG4
 		
 		<dl>
-			<dt><a href="https://twitter.com/alice_googling">@alice_googling</a></dt>
+			<dt><a href="https://twitter.com/alice_googling">@alice_googling</a> ~ <a href="https://git.alicemaz.com/public/?p=alice_googling.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>markov chains made from about a year of my google search history. interesting to me because I can read the composites and remember what I'd actually searched to generate those ngrams. not nearly the bare-my-soul art project I'd expected it to be. it turns out I mostly just google programming stuff.</dd>
 			<dd>the search history corpus hasn't been updated since I made it; I'm very careful to redact other people's information, and doing so is a chore. when the convenience of having my past searches available is finally outweighed by my privacy paranoia, I will likely update this bot a second time and stop searching over the clearnet for good.</dd>
 		</dl>
@@ -102,7 +102,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xMASS
 		
 		<dl>
-			<dt><a href="https://twitter.com/massconnect4">@massconnect4</a></dt>
+			<dt><a href="https://twitter.com/massconnect4">@massconnect4</a> ~ <a href="https://git.alicemaz.com/public/?p=massconnect4.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>on hiatus pending work on a 2.0. team-based connect 4 played over twitter. the core game mode, teams tweet column numbers at the bot on their team's turn, the column with the most votes is played. it was fun for awhile, people got very into it, but participation dropped off after a few months, so I shut it down. plan was to add some variety to keep it fresh but... that was in june, and other things intervened. soon(tm).</dd>
 			<dd>what makes it really interesting is that team assignments are permanent. you pick a team and that's your team, forever. I was hoping this would raise the emotional stakes, foster camaraderie, turn up the thrill of victory and agony of defeat, and... it <em>totally</em> worked. honestly one of the more exciting things I've made, lovely watching people cheer each other on, get invested in outcomes, all off of a simple--solved, even--little board game. fun.</dd>
 			<dd>one mistake I made was running games twice daily, fatigue set in and turned to disinterest. will probably ramp down to twice weekly, so it becomes more of an event to look forward to. I was tracking stats, both individual and team, but not really doing anything with them, so I'd like to set up a small website to check on standings and further incentivize participation. a few alternate game modes might be neat. the original plan was "blitz" (first reply plays) and "chaos" (random reply plays) but watching the voting dynamics, I don't think either would be as fun. playing up the team angle is clearly the way to go. what will probably be my second mode is all-play: each player gets a vote per round and can use it for either team. <em>that</em> will have some interesting consequences I'm sure, higher-level strategy as teams need to decide whether to play offense or defense.</dd>
@@ -116,8 +116,8 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xJAJ2
 		
 		<dl>
-			<dt><a href="https://twitter.com/jajlang">@jajlang</a></dt>
-			<dd>topical jokebot. I was very angry when scotus refused cert on oracle v. google. an api is clearly a method of operation in exactly the same way that a user interface is, and despite the fact that it is a legitimate create work, allowing copyright unduly burdens users. lotus v. borland. at least it's only federal circuit.</dd>
+			<dt><a href="https://twitter.com/jajlang">@jajlang</a> ~ <a href="https://git.alicemaz.com/public/?p=jaj.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
+			<dd>topical jokebot. I was very angry when scotus refused cert on oracle v. google. an api is clearly a method of operation in exactly the same way that a user interface is, and despite the fact that it is a legitimate creative work, allowing copyright unduly burdens users. lotus v. borland. at least it's only federal circuit.</dd>
 			<dd>anyway so I made this thing. it has every method of every class in about a half-dozen packages. splits out the words, deduplicates, checks for synonyms, puts them back in place and fixes the caps. could be the basis of the worst trivia night in the world.</dd>
 		</dl>
 	</div>
@@ -128,7 +128,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xKNOCK2
 		
 		<dl>
-			<dt><a href="https://twitter.com/knock2bot">@knock2bot</a></dt>
+			<dt><a href="https://twitter.com/knock2bot">@knock2bot</a> ~ <a href="https://git.alicemaz.com/public/?p=knock2bot.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>jokebot (obviously). makes me laugh more often than I'd like to admit. chooses one random word, then finds a bigram phrase containing it. not much more to it than that.</dd>
 		</dl>
 	</div>
@@ -141,7 +141,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xJEO4
 
 		<dl>
-			<dt><a href="https://twitter.com/super_jeopardy">@super_jeopardy</a></dt>
+			<dt><a href="https://twitter.com/super_jeopardy">@super_jeopardy</a> ~ <a href="https://git.alicemaz.com/public/?p=super_jeopardy.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>jokebot. pulls two jeopardy questions out of a corpus, splits the strings on (one of: articles, conjunctions, or prepositions, chosen randomly), combines arrays, drops strings from the middle until the character count goes below 140, and joins. this isn't a bad method, turns out: because you're working with fragments of natural language, and because you're starting with a start of a sentence and ending with an end, results tend to be more coherent than say markoving the text.</dd>
 			<dd>still, not quite right. you can see the seams, and most of what it produces doesn't make sense as a jeopardy question. I think about revisiting it every now and then (certainly I'd make it so the word "this" occurs precisely once in a well-formed result) but I doubt I will.</dd>
 			<dd>I was cagey on the account page about it being a bot in the hopes that actual jeopardy fans would think it was legitimate and follow. they do, though they usually unfollow pretty quickly.</dd>
@@ -154,7 +154,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xBARB2
 
 		<dl>
-			<dt><a href="https://twitter.com/believebarbossa">@believebarbossa</a></dt>
+			<dt><a href="https://twitter.com/believebarbossa">@believebarbossa</a> ~ <a href="https://git.alicemaz.com/public/?p=believebarbossa.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>jokebot. my first, and the trivial-but-doable project that got me back into programming, so it holds a special place in my heart. words chosen at random. with eternal thanks to darius kazemi.</dd>
 		</dl>
 	</div>
@@ -167,7 +167,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xPOTUS4
 
 		<dl>
-			<dt><a href="https://twitter.com/potustl">@potustl</a></dt>
+			<dt><a href="https://twitter.com/potustl">@potustl</a> ~ <a href="https://git.alicemaz.com/public/?p=potustl.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>by far my worst bot, and also the bot with the most followers, nearly all of whom don't even know what twitter bots are. follows every account that @potus follows and retweets everything they tweet. a constant stream of us government propaganda mixed with updates on all your favorite chicago sports teams. absolutely atrocious. I've decided to let it get to a few thousand followers, then think of ways to use it to spread discord among the masses.</dd>
 		</dl>
 	</div>
@@ -179,7 +179,7 @@ define(`xMISS5', ``include(miss-5)'')dnl
 		xIDEAL3
 
 		<dl>
-			<dt><a href="https://twitter.com/consumer_ideal">@consumer_ideal</a></dt>
+			<dt><a href="https://twitter.com/consumer_ideal">@consumer_ideal</a> ~ <a href="https://git.alicemaz.com/public/?p=consumer_ideal.git;a=summary"><img class="git-icon" src="assets/img/git-icon.png"></a></dt>
 			<dd>jokebot. on hiatus, probably retired. tweets every twitter analytics category, determining which to tweet based on the percentages listed in the twitter analytics data. also it tweets disparaging accusations about random fortune 500 companies. I think I thought it was a clever statement or something.</dd>
 		</dl>
 	</div>
