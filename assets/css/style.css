@@ -109,6 +109,10 @@ pre {
 	height: auto;
 }
 
+.news {
+    margin-right: 10em;
+}
+
 .twine > * {
 	margin-bottom: 1em;
 }
