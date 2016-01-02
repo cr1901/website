@@ -77,7 +77,7 @@ staging/sitemap/index: $(html_index) $(sitemap_block)
 
 staging/sitemap/pages/%: src/pages/%.m4 $(sitemap_block)
 	mkdir -p $(@D)
-	m4 -D xLOC=$(@F) \
+	m4 -D xLOC=$(@F).html \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=daily \
 		-D xPRIORITY=0.7 $(sitemap_block) > $@
