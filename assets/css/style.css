@@ -109,7 +109,7 @@ pre {
 	height: auto;
 }
 
-.news {
+.news, .text-dump {
     margin-right: 10em;
 }
 
