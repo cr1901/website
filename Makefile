@@ -157,6 +157,7 @@ build/%.html: staging/pages/%.html
 	ln -sf ../assets/ $(@D)
 	ln -sf ../twine/ $(@D)
 	ln -sf ../favicon.ico $(@D)
+	ln -sf ../robots.txt $(@D)
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
