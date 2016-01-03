@@ -53,19 +53,19 @@ $(make_out): $(make_page) $(makefile) $(html_base) $(html_nav)
 		-DxPAGE=$< \
 		-DxJUMPTOP=$(@F)"#" \
 		-DxBOT=$(shell $(now)) \
-		-DxMAKE=make $(html_base) | \
-	sed -e "/xMAKEFILE/ r $(makefile)" \
-	 	-e "/xMAKEFILE/ d" \
-	 	-e 's/^\s*//' | \
+		-DxMAKE=make \
+		-DxMAKEFILE=$(makefile) $(html_base) | \
+	sed -e 's/^\s*//' | \
 	sed -e '/^<code>$$/,/^<\/code>$$/{/^<code>$$/b;/^<\/code>$$/b;s/</\&lt;/g;s/>/\&gt;/g}' > $@
 	@printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: src/pages/% $(html_base) $(html_nav)
 	@mkdir -p $(@D)
-	@ln -sf ../assets/ $(@D)
-	@ln -sf ../twine/ $(@D)
+	cp -rf ./assets/ $(@D)
+	#@ln -sf ../assets/ $(@D)
+	#@ln -sf ../twine/ $(@D)
 	$(eval pretty_name := $(shell [[ $(<F) == 'index' ]] && echo 'home' || echo $(<F)))
-	@m4 -DxTITLE="<title>alice maz - "$(pretty_name)"</title>" \
+	@m4 -DxTITLE="<title>WDJ - "$(pretty_name)"</title>" \
 		-DxNAV=$(html_nav) \
 		-DxPAGE=$< \
 		-DxJUMPTOP=$(@F)"#" \

@@ -96,6 +96,14 @@ pre {
 	text-align: center;
 }
 
+#me-img > img {
+	/* border: 1px solid #111; */
+	/* text-align: right; */
+	border: none;
+	max-width: 360px;
+	height: auto;
+}
+
 #main-img > img {
 	width: 75%;
 	height: auto;

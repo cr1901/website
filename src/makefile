@@ -1,23 +1,19 @@
 <div id="main" role="main">
 	<p>
-		I generate my website on my computer with gnu make using this makefile. it gives me all the dev conveniences I'd get from a templating engine or mvc framework but lets me serve plain documents without javascript from a traditional webserver. <code>while true; do make; sleep 2; done</code>, and it only ever builds what it needs to.
+		My website is generated based upon a "framework" created by <a href="https://alicemaz.com">Alice Maz</a> (go visit her and say hello, she's pretty cool!). I've added some extra functionality using the m4 macro processor for text substitution in place of sed.
+	</p>
+	
+	<p>
+		My next goal is to replace the GNU-specific Makefile with a more generic (or BSD equivalent). The goal should be that I can build and deploy this website on my 50MHz 486 :D!
 	</p>
 
 	<p>
-		it builds most pages by stitching files into templates, inserting and changing text and links here and there. it builds <i>this</i> page by inserting <i>itself</i> into a template, making it its own dependency, which has a few interesting consequences. this was the first time, for instance, I had to change a regex's pattern to stop it from matching a copy of itself. it also means this page will always have the current version of the makefile because it watches itself to see if it's newer than this page.
-	</p>
-
-	<p>
-		I really like make. vi, sed, screen, I tend to gravitate towards tools older than I am. they're the survivors. I actually do like javascript, and I write a lot of it. but I think the web would be better if it were the exception rather than the rule. "back in my day, when we used the hypertext transfer protocol, we sent hypertext over it!" yadda yadda.
-	</p>
-
-	<p>
-		I could have used a static site generator, I hear there are several good ones. but this is just so much more <i>fun</i>.
+		 Though I like the old Unix shell tools, I'm abivalent toward usings them for every task. I certainly don't believe Unix is the One True OS (and by extension, that GNU/Linux form the One True Unix). That said, I'm all for minimalism, and static websites making a resurgence. Using Ms. Maz's make workflow (augmented with m4, sed, and other shell tools) seemed like a good way to create a nice-looking, standards-compliant, low-resource website.
 	</p>
 
 	<pre>
 		<code>
-			xMAKEFILE
+			include(xMAKEFILE)
 		</code>
 	</pre>
 </div>
