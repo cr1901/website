@@ -154,8 +154,11 @@ $(bots_out): $(tweet_staging) $(bot_page_staging) $(bot_gameboard)
 
 build/%.html: staging/pages/%.html
 	mkdir -p $(@D)
-	ln -sf ../assets/ $(@D)
-	ln -sf ../twine/ $(@D)
+	echo $(@D)
+	# ln -sf ../assets/ $(@D)
+	# ln -sf ../twine/ $(@D)
+	cp -R assets build
+	cp -R twine build
 	ln -sf ../favicon.ico $(@D)
 	ln -sf ../robots.txt $(@D)
 	cp -r $< $@
@@ -193,7 +196,6 @@ unstage:
 unbuild:
 	rm -rf build/
 	printf "($(shell $(pretty_datetime))) unmade build/\n"
->>>>>>> 8a02209c57a8dadf170747cfdff551d3a2a3f1ff
 
 clean:
 	$(MAKE) unstage

@@ -1,3 +1,4 @@
+define(`xMAKEFILE', ``include(xMAKEFILE)'')dnl
 <div id="main" role="main">
 	<p>
 		My website is generated based upon a "framework" created by <a href="https://alicemaz.com">Alice Maz</a> (go visit her and say hello, she's pretty cool!). I've added some extra functionality using the m4 macro processor for text substitution in place of sed.
@@ -13,7 +14,7 @@
 
 	<pre>
 		<code>
-			include(xMAKEFILE)
+			xMAKEFILE
 		</code>
 	</pre>
 </div>
