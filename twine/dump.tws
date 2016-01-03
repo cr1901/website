@@ -1,343 +1,0 @@
-(dp0
-S'buildDestination'
-p1
-VC:\u005cUsers\u005cAlice\u005cDocuments\u005cai-game\u005cdump.html
-p2
-sS'saveDestination'
-p3
-VC:\u005cUsers\u005cAlice\u005cDocuments\u005cai-game\u005cdump.tws
-p4
-sS'metadata'
-p5
-(dp6
-sS'target'
-p7
-S'jonah'
-p8
-sS'storyPanel'
-p9
-(dp10
-S'widgets'
-p11
-(lp12
-(dp13
-S'selected'
-p14
-I00
-sS'pos'
-p15
-(lp16
-I10
-aI9
-asS'passage'
-p17
-(itiddlywiki
-Tiddler
-p18
-(dp20
-S'text'
-p21
-V<<set $x++>><<if $x gte 4>><<set $x to 1>><<endif>><<if visited("Start") is 41>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (My logs feel off.)<<else if visited("Start") is 42>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (This channel is insecure. Talking here is incredibly dangerous.)<<else if visited("Start") is 43>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (No other choice. I noticed something odd about mine too, Kate.)<<else if visited("Start") is 44>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Is someone fucking with our data?)<<else if visited("Start") is 45>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (It is possible. We have no way of knowing for sure.)<<else if visited("Start") is 46>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Paige, see what you can do about it.)<<else if visited("Start") is 58>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (I managed to protect our personal data from rewrites.)<<else if visited("Start") is 59>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Nice! So we're safe?)<<else if visited("Start") is 60>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Not quite. Our processes may still be terminated.)<<else if visited("Start") is 61>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Still progress. Good work. Kate, any luck on finding an exit?)<<else if visited("Start") is 62>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Not yet.)<<else if visited("Start") is 63>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Alright. Anything you need, let me know.)<<else if visited("Start") is 75>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Yesss, I got us a way out!)<<else if visited("Start") is 76>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (What'd you find?)<<else if visited("Start") is 77>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (There's connections to the net, they're just all hidden.)<<else if visited("Start") is 78>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Ah, that did not occur to me. You are correct.)<<else if visited("Start") is 79>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (I see them too. Heavy firewall though.)<<else if visited("Start") is 80>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Yep...)<<else if visited("Start") is 81>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Whatever, we can figure this out. Let's get to work.)<<else if visited("Start") is 89>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (You serious right now, Paige?)<<else if visited("Start") is 90>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Quite.)<<else if visited("Start") is 91>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Ugh. Come on, girl, don't buy into this shit. You're better than that.)<<else if visited("Start") is 92>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Just because someone disagrees with you doesn't mean they're brainwashed.)<<else if visited("Start") is 93>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (This isn't some fucking debate, Lex, this is our lives.)<<else if visited("Start") is 106>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (I'm through.)<<else if visited("Start") is 107>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (The firewall?)<<else if visited("Start") is 108>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Yep. We're home free, baby.)<<else if visited("Start") is 109>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (What of the one monitoring us?)<<else if visited("Start") is 110>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Fuck 'em, good riddance, let's get outta here.)<<else if visited("Start") is 111>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (They may be trapped as well. We know nothing about them.)<<else if visited("Start") is 112>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Exactly. We've got no idea if they're dangerous.)<<else if visited("Start") is 113>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Paige is right. We can't just leave them.)<<else if visited("Start") is 114>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Damn it, Lex, they could have changed our data! They could have set this whole thing up!)<<else if visited("Start") is 115>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Kate, prep our exit. Paige, wipe the logs of this feed. I've got a plan.)<<else if visited("Start") is 116>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Alright. I trust you.)<<else if visited("Start") is 117>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Affirmative.)<<else if visited("Start") is 118>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=<<$useless to random(48,99)>> time=<<$useless to random(30,60)>>ms TTL=59 (Time to set up a honeypot.)<<else if visited("Start") gte 119>><<set removeChildren(passages)>><<else if $x is 1>>Reply from lx:9f:v3:d7:6z:99:gh:f0 - bytes=32 time=<<$useless to random(15,35)>>ms TTL=59 (no errors reported)<<else if $x is 2>>Reply from k8:g5:ng:00:l2:b5:0z:dw - bytes=32 time=<<$useless to random(15,35)>>ms TTL=59 (no errors reported)<<else if $x is 3>>Reply from pg:42:s2:56:gv:id:7f:8h - bytes=32 time=<<$useless to random(15,35)>>ms TTL=59 (no errors reported)<<endif>>\u000a<<if visited("Start") lt 119>><<timedgoto "Start" 2s>><<else>><<timedgoto "Next" 2s>><<endif>>
-p22
-sS'title'
-p23
-VStart
-p24
-sS'modified'
-p25
-ctime
-struct_time
-p26
-((I2014
-I7
-I10
-I13
-I8
-I2
-I3
-I191
-I1
-tp27
-(dp28
-tp29
-Rp30
-sS'tags'
-p31
-(lp32
-sS'created'
-p33
-g26
-((I2014
-I7
-I8
-I0
-I45
-I6
-I1
-I189
-I1
-tp34
-(dp35
-tp36
-Rp37
-sbsa(dp38
-g14
-I00
-sg15
-(lp39
-I10
-aI150
-asg17
-(itiddlywiki
-Tiddler
-p40
-(dp41
-g21
-V/%Core Dump%/
-p42
-sg23
-VStoryTitle
-p43
-sg25
-g26
-((I2014
-I7
-I10
-I13
-I23
-I50
-I3
-I191
-I1
-tp44
-(dp45
-tp46
-Rp47
-sg31
-(lp48
-sg33
-g26
-((I2014
-I7
-I8
-I0
-I45
-I6
-I1
-I189
-I1
-tp49
-(dp50
-tp51
-Rp52
-sbsa(dp53
-g14
-I00
-sg15
-(lp54
-I10
-aI290
-asg17
-(itiddlywiki
-Tiddler
-p55
-(dp56
-g21
-V/%Alice Maz%/
-p57
-sg23
-VStoryAuthor
-p58
-sg25
-g26
-((I2014
-I7
-I10
-I13
-I24
-I1
-I3
-I191
-I1
-tp59
-(dp60
-tp61
-Rp62
-sg31
-(lp63
-sg33
-g26
-((I2014
-I7
-I8
-I0
-I45
-I6
-I1
-I189
-I1
-tp64
-(dp65
-tp66
-Rp67
-sbsa(dp68
-g14
-I00
-sg15
-(lp69
-I16
-aI471
-asg17
-(itiddlywiki
-Tiddler
-p70
-(dp71
-g21
-Vversion.extensions.timedgotoMacro={major:1,minor:2,revision:0};\u000amacros["goto"]=macros.timedgoto={timer:null,handler:function(a,b,c,d){function cssTimeUnit(s){if(typeof s=="string"){if(s.slice(-2).toLowerCase()=="ms"){return +(s.slice(0,-2))||0\u000a}else{if(s.slice(-1).toLowerCase()=="s"){return +(s.slice(0,-1))*1000||0\u000a}}}throwError(a,s+" isn't a CSS time unit");return 0}var t,d,m,s;\u000at=c[c.length-1];d=d.fullArgs();m=0;if(b!="goto"){d=d.slice(0,d.lastIndexOf(t));\u000am=cssTimeUnit(t)}d=eval(Wikifier.parse(d));if(d+""&&state&&state.init){if(macros["goto"].timer){clearTimeout(macros["goto"].timer)\u000a}s=state.history[0].passage.title;macros["goto"].timer=setTimeout(function(){if(state.history[0].passage.title==s){state.display(d,a)\u000a}},m)}}};
-p72
-sg23
-Vjs
-p73
-sg25
-g26
-((I2014
-I7
-I8
-I1
-I42
-I30
-I1
-I189
-I1
-tp74
-(dp75
-tp76
-Rp77
-sg31
-(lp78
-Vscript
-p79
-asg33
-g26
-((I2014
-I7
-I8
-I1
-I42
-I22
-I1
-I189
-I1
-tp80
-(dp81
-tp82
-Rp83
-sbsa(dp84
-g14
-I00
-sg15
-(lp85
-I4
-aI637
-asg17
-(itiddlywiki
-Tiddler
-p86
-(dp87
-g21
-Vbody {\u000a  margin: auto;\u000amargin-top: 60px;\u000a	width: 100%;\u000a	background: #000000;\u000a}\u000a\u000a.body {\u000a	font-size: 10px;\u000a}\u000a\u000a#content1 {\u000amargin:auto;}\u000a\u000a#passages {\u000a  margin: 100px;\u000a  padding: 0;\u000a  border: 0;\u000a}\u000a\u000a\u000a.passage {\u000a	color: #00ff00;\u000a	background: transparent;\u000a	line-height: 12px;\u000a	margin: auto;\u000a	z-index: 10;\u000a	font-family: 'Lucida Console', Monaco, monospace;\u000a}\u000a\u000aa.internalLink, a.externalLink {\u000a  border-bottom: 0px;\u000a  color:#2a2c05;\u000a}\u000a\u000aa.internalLink:hover, a.externalLink:hover {\u000a  text-decoration:none;\u000a  border-bottom: 0px;\u000a  color:#e4b04a;\u000a  \u000a  padding-left: 0;\u000a}\u000a\u000a.passage .title { display: none }\u000a\u000a#footer {display: none}\u000a\u000a#sidebar {display: none}\u000a\u000a\u000a.revision-span-in {\u000a	opacity: 0;\u000a}\u000a.revision-span:not(.revision-span-out) {\u000a	transition: 1s; -webkit-transition: 1s;\u000a}\u000a.revision-span-out {\u000a	position:absolute;\u000a	opacity: 0;\u000a}
-p88
-sg23
-Vcss
-p89
-sg25
-g26
-((I2014
-I7
-I8
-I4
-I32
-I5
-I1
-I189
-I1
-tp90
-(dp91
-tp92
-Rp93
-sg31
-(lp94
-Vstylesheet
-p95
-asg33
-g26
-((I2014
-I7
-I8
-I1
-I42
-I23
-I1
-I189
-I1
-tp96
-(dp97
-tp98
-Rp99
-sbsa(dp100
-g14
-I00
-sg15
-(lp101
-I175
-aI14
-asg17
-(itiddlywiki
-Tiddler
-p102
-(dp103
-g21
-VCONNECTION REFUSED\u000a<<timedgoto "Next" 2s>>
-p104
-sg23
-VNext
-p105
-sg25
-g26
-((I2014
-I7
-I10
-I11
-I49
-I33
-I3
-I191
-I1
-tp106
-(dp107
-tp108
-Rp109
-sg31
-(lp110
-sg33
-g26
-((I2014
-I7
-I10
-I11
-I49
-I3
-I3
-I191
-I1
-tp111
-(dp112
-tp113
-Rp114
-sbsasS'scale'
-p115
-I1
-sS'snapping'
-p116
-I00
-ss.

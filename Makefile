@@ -9,7 +9,7 @@
 SHELL := /bin/bash
 MAKEFLAGS := s
 
-domain := https://www.alicemaz.com/
+domain := https://www.wdj-consulting.com/
 makefile := Makefile
 
 html_base := src/base.m4
@@ -158,7 +158,7 @@ build/%.html: staging/pages/%.html
 	# ln -sf ../assets/ $(@D)
 	# ln -sf ../twine/ $(@D)
 	cp -R assets build
-	cp -R twine build
+	# cp -R twine build
 	ln -sf ../favicon.ico $(@D)
 	ln -sf ../robots.txt $(@D)
 	cp -r $< $@
@@ -171,13 +171,13 @@ build/%.html: staging/pages/%.html
 
 localhref:
 	for f in build/*.html; do \
-		sed -i 's|^\(<base href="\)$(domain)\(">\)$$|\1/\2|' $$f; \
+		sed -i 's|^\(<base href="\)$(domain)\(">\)|\1F:/Consult/website/build/\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to local\n"
 
 remotehref:
 	for f in build/*.html; do \
-		sed -i 's|^\(<base href="\)/\(">\)$$|\1$(domain)\2|' $$f; \
+		sed -i 's|^\(<base href="\)F:/Consult/website/build/\(">\)$$|\1$(domain)\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to remote\n"
 
