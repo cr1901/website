@@ -156,7 +156,7 @@ build/%.html: staging/pages/%.html
 	mkdir -p $(@D)
 	# ln -sf ../assets/ $(@D)
 	# ln -sf ../twine/ $(@D)
-	cp -R assets build
+	cp -rf assets build
 	# cp -R twine build
 	ln -sf ../favicon.ico $(@D)
 	ln -sf ../robots.txt $(@D)
