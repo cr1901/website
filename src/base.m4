@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="description" content="Anachronism Enthusiast">
-		<base href="https://www.wdj-consulting.com/">
+		<base href="http://www.wdj-consulting.com/">
 		xTITLE
 		<link rel="stylesheet" href="assets/css/style.css">
 	</head>
