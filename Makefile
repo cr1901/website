@@ -154,7 +154,6 @@ $(bots_out): $(tweet_staging) $(bot_page_staging) $(bot_gameboard)
 
 build/%.html: staging/pages/%.html
 	mkdir -p $(@D)
-	echo $(@D)
 	# ln -sf ../assets/ $(@D)
 	# ln -sf ../twine/ $(@D)
 	cp -R assets build
@@ -184,8 +183,9 @@ remotehref:
 deploy:
 	$(MAKE)
 	$(MAKE) remotehref
-	rsync -rvLptWc --stats --progress --del -e ssh \
-		build/ kitchen@salacia:/usr/local/www/site
+	cmd /c "pscp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site"
+	# rsync -rvLptWc --stats --progress --del -e ssh \
+	# 	build/ kitchen@salacia:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 	$(MAKE) localhref
 
