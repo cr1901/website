@@ -18,9 +18,14 @@
 		</tr>
 		<tr>
 			<td class="contact-key">Freenode</td>
-			<td>cr1901_modern</td>
-			<td>cr1901_286</td>
+			<td style="padding-left: 10px">cr1901_modern</td>
+			<td style="padding-left: 10px">cr1901_286</td>
 		</tr>
+dnl		<!-- <tr>
+dnl			<td class="contact-key">Typically in:</td>
+dnl			<td style="padding-left: 10px">#higan</td>
+dnl			<td style="padding-left: 10px">#m-labs</td>
+dnl		</tr> -->
 		<tr class="gap-row"/>
 		<tr>
 			<td class="contact-key">Email</td>
