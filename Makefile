@@ -9,7 +9,7 @@
 SHELL := /bin/bash
 MAKEFLAGS := s
 
-domain := http://www.wdj-consulting.com/
+domain := https://www.wdj-consulting.com/
 makefile := Makefile
 
 html_base := src/base.m4
