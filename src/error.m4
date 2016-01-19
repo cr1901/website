@@ -20,6 +20,7 @@
 
 			img {
 				border: 1px solid #111;
+				max-height: 480px;
 			}
 
 			p {
