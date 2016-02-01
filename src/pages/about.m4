@@ -5,37 +5,33 @@
 	</p>
 	<p>
 		The meaning of my handle (cr1901) is lost to time. On Unix machines, I try to use the name <i>wjones</i>.
+		Twitter is the easiest way to contact me as of this writing (2-1-2016).
 	</p>	
 
-	<table class="contact">
-		<tr>
-			<td class="contact-key">Twitter</td>
-			<td><a href="https://twitter.com/cr1901">@cr1901</a></td>
-		</tr>
-		<tr>
-			<td class="contact-key">Github</td>
-			<td><a href="https://github.com/cr1901">cr1901</a></td>
-		</tr>
-		<tr>
-			<td class="contact-key">Freenode</td>
-			<td style="padding-left: 10px">cr1901_modern</td>
-			<td style="padding-left: 10px">cr1901_286</td>
-		</tr>
-dnl		<!-- <tr>
-dnl			<td class="contact-key">Typically in:</td>
-dnl			<td style="padding-left: 10px">#higan</td>
-dnl			<td style="padding-left: 10px">#m-labs</td>
-dnl		</tr> -->
-		<tr class="gap-row"/>
-		<tr>
-			<td class="contact-key">Email</td>
-			<td><a href="mailto:thor0505@comcast.net">Personal</a></td>
-		</tr>
-		<tr>
-			<td class="contact-key">Keybase</td>
-			<td><a href="https://keybase.io/cr1901">cr1901</a></td>
-		</tr>
-	</table>
+		<dl>
+			<dt class="contact-key">Twitter</dt>
+			<dd><a href="https://twitter.com/cr1901">@cr1901</a></dd>
+		</dl>
+		<dl>
+			<dt class="contact-key">Github</dt>
+			<dd><a href="https://github.com/cr1901">cr1901</a></dd>
+		</dl>
+		<dl>
+			<dt class="contact-key">Freenode</dt>
+			<dd>cr1901_modern</dd>
+			<dd>cr1901_286 (Yes, it's a real 286!)</dd>
+dnl        	<dt class="contact-key">Typically Idling in</dt>
+dnl        	    <dd>#higan</dd>
+dnl        	    <dd>#m-labs</dd>
+		</dl>
+		<dl>
+			<dt class="contact-key">Email</dt>
+			<dd><a href="mailto:thor0505@comcast.net">Personal</a></dd>
+		</dl>
+		<dl>
+			<dt class="contact-key">Keybase</dt>
+			<dd><a href="https://keybase.io/cr1901">cr1901</a></dd>
+		</dl>
 
 </div>
 
