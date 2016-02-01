@@ -22,11 +22,15 @@ error_base := src/error.m4
 error_pages := $(wildcard src/errors/*.m4)
 error_out:= $(addprefix build/,$(notdir $(error_pages:%.m4=%.html)))
 
+blog_base := src/blog.m4
+blog_nav := src/blognav.m4
+blog_pages := $(wildcard src/blog/*.m4)
+# TODO: DO not hardcode blog prefix?
+blog_out:= $(addprefix build/blog/,$(notdir $(blog_pages:%.m4=%.html)))
+
 makefile_staging := staging/makefile
 make_page_staging := staging/pages/makefile.html
 make_out := build/makefile.html
-
-twines := $(wildcard twine/*.html)
 
 sitemap_first := src/sitemap/first.m4
 sitemap_last := src/sitemap/last.m4
@@ -34,29 +38,29 @@ sitemap_block := src/sitemap/block.m4
 sitemap_staging := staging/sitemap/index \
 	$(addprefix staging/sitemap/pages/, \
 		$(filter-out index,$(basename $(notdir $(html_pages))))) \
-	$(addprefix staging/sitemap/,$(twines:%.html=%))
+	$(addprefix staging/sitemap/blog/, $(basename $(notdir $(blog_pages))))
 sitemap_out := build/sitemap.xml
 
-tweet_base := src/twitter/base.m4
-tweet_pages := $(wildcard src/twitter/tweets/*.m4)
-tweet_staging := $(addprefix staging/tweets/,$(basename $(notdir $(tweet_pages))))
-bot_page_staging := staging/pages/bots.html
-bot_gameboard := src/twitter/gameboard.m4
-bots_out := build/bots.html
+# tweet_base := src/twitter/base.m4
+# tweet_pages := $(wildcard src/twitter/tweets/*.m4)
+# tweet_staging := $(addprefix staging/tweets/,$(basename $(notdir $(tweet_pages))))
+# bot_page_staging := staging/pages/bots.html
+# bot_gameboard := src/twitter/gameboard.m4
+# bots_out := build/bots.html
 
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
 
 .PHONY: all localhref remotehref deploy unstage unbuild clean
-.INTERMEDIATE: $(make_page_staging) $(makefile_staging) $(bot_page_staging) $(tweet_staging)
+.INTERMEDIATE: $(make_page_staging) $(makefile_staging)
 
 
 ###########
 #  make   #
 ###########
 
-all: $(html_out) $(error_out) $(sitemap_out)
+all: $(html_out) $(error_out) $(blog_out) $(sitemap_out)
 
 
 ###########
@@ -82,32 +86,35 @@ staging/sitemap/pages/%: src/pages/%.m4 $(sitemap_block)
 		-D xFREQ=daily \
 		-D xPRIORITY=0.7 $(sitemap_block) > $@
 
-staging/sitemap/twine/%: twine/%.html $(sitemap_block)
+# TODO: Don't hardcode the "blog" path?
+staging/sitemap/blog/%: src/blog/%.m4 $(sitemap_block)
 	mkdir -p $(@D)
-	m4 -D xLOC=$< \
+	m4 -D xLOC=blog/$(@F).html \
 		-D xMOD=$(shell $(call last_mod,$<)) \
 		-D xFREQ=monthly \
 		-D xPRIORITY=0.3 $(sitemap_block) > $@
 
-staging/tweets/%: src/twitter/tweets/%.m4 $(tweet_base)
-	mkdir -p $(@D)
-	$(eval acct := $(shell echo '$<' | \
-		sed -e 's/\<tweets\>/accounts/' -e 's/-[0-9]\+//'))
-	m4 -D xACCT=$(acct) -D xTWEET=$< $(tweet_base) | \
-	sed -e 's/^\s*//' > $@
+# staging/tweets/%: src/twitter/tweets/%.m4 $(tweet_base)
+# 	mkdir -p $(@D)
+# 	$(eval acct := $(shell echo '$<' | \
+# 		sed -e 's/\<tweets\>/accounts/' -e 's/-[0-9]\+//'))
+# 	m4 -D xACCT=$(acct) -D xTWEET=$< $(tweet_base) | \
+# 	sed -e 's/^\s*//' > $@
 
 staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	mkdir -p $(@D)
 	
 	$(eval stem := $(basename $(<F)))
 	$(eval pretty_name := $(shell [[ $(stem) == 'index' ]] && \
-		echo 'home' || ([[ $(stem) == 'makefile' ]] && \
-		echo 'make' || echo $(stem))))
+		echo 'home' || ([[ $(stem) == 'blog' ]] && \
+		echo 'Anachronism' || ([[ $(stem) == 'makefile' ]] && \
+		echo 'make' || echo $(stem)))))
 	$(eval href_name := $(shell [[ $(stem) == 'index' ]] && \
 		echo '/' || echo $(stem).html))
 	
 	m4 -D xTITLE='<title>WDJ - "$(pretty_name)"</title>' \
 		-D xNAV=$(html_nav) \
+		-D xBLOGNAV=$(blog_nav) \
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
@@ -132,6 +139,22 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 	
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
+staging/blog/%.html: src/blog/%.m4 $(blog_base)
+	mkdir -p $(@D)
+	
+	$(eval stem := $(basename $(<F)))
+	
+	# TODO: Don't hardcode blog
+	m4 -D xTITLE='<title>WDJ - $(stem)</title>' \
+		-D xNAV=$(html_nav) \
+		-D xBLOGNAV=$(blog_nav) \
+		-D xPAGE=$< \
+		-D xJUMPTOP=blog/$(@F)'#' \
+		-D xBOT=$(shell $(now)) \
+		-D xMAKE='<a href="makefile.html">make</a>' $(blog_base) | \
+	sed -e 's/^\s*//' > $@
+	
+	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 ###########
 #  build  #
@@ -147,17 +170,15 @@ $(make_out): $(make_page_staging) $(makefile_staging)
 	m4 -D xMAKEFILE=$(makefile_staging) $< > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-$(bots_out): $(tweet_staging) $(bot_page_staging) $(bot_gameboard)
+# TODO: Any way to put this into the build/%.html target?
+build/blog/%.html: staging/blog/%.html
 	mkdir -p $(@D)
-	m4 -D xGAMEBOARD=$(bot_gameboard) -I $(<D) $(bot_page_staging) > $@
+	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 build/%.html: staging/pages/%.html
 	mkdir -p $(@D)
-	# ln -sf ../assets/ $(@D)
-	# ln -sf ../twine/ $(@D)
 	cp -rf assets build
-	# cp -R twine build
 	ln -sf ../favicon.ico $(@D)
 	ln -sf ../robots.txt $(@D)
 	cp -r $< $@
@@ -168,14 +189,15 @@ build/%.html: staging/pages/%.html
 #  tasks  #
 ###########
 
+# TODO: Don't hardcode blog... oh you get the point.
 localhref:
-	for f in build/*.html; do \
+	for f in build/*.html build/blog/*.html; do \
 		sed -i 's|^\(<base href="\)$(domain)\(">\)|\1F:/Consult/website/build/\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to local\n"
 
 remotehref:
-	for f in build/*.html; do \
+	for f in build/*.html build/blog/*.html; do \
 		sed -i 's|^\(<base href="\)F:/Consult/website/build/\(">\)$$|\1$(domain)\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to remote\n"
@@ -184,8 +206,6 @@ deploy:
 	$(MAKE)
 	$(MAKE) remotehref
 	cmd /c "pscp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site"
-	# rsync -rvLptWc --stats --progress --del -e ssh \
-	# 	build/ kitchen@salacia:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 	$(MAKE) localhref
 

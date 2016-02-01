@@ -112,6 +112,10 @@ pre {
 	height: auto;
 }
 
+#blog-sidebar > ul {
+    list-style-type: inherit;
+}
+
 #main-img > img {
 	width: 75%;
 	height: auto;

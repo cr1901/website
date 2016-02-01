@@ -2,9 +2,10 @@
 	<h1>WDJ</h1>
 
 	<ul>
-		<li><a href="/">home</a></li>
-		<li><a href="about.html">about</a></li>
+		<li><a href="/">Home</a></li>
+		<li><a href="about.html">About</a></li>
 		<hr/>
-		<li>code</li>
+		<li><a href="blog.html">Anachronism</a></li>
+		<li>Code</li>
 	</ul>
 </div>
