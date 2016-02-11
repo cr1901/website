@@ -176,7 +176,7 @@ build/blog/%.html: staging/blog/%.html
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-build/%.html: staging/pages/%.html
+build/%.html: staging/pages/%.html assets/css/style.css
 	mkdir -p $(@D)
 	cp -rf assets build
 	ln -sf ../favicon.ico $(@D)

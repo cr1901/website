@@ -125,22 +125,11 @@ pre {
     margin-right: 10em;
 }
 
-.twine > * {
-	margin-bottom: 1em;
-}
-
-.twine > * > img {
-	display: block;
-	margin: 0 auto;
-	width: 90%;
-	height: auto;
+.strike {
+    text-decoration: line-through;
 }
 
 /* TODO come up with a better way of organizing dl styles */
-
-.twine > * > dl {
-	margin-left: 3em;
-}
 
 .contact > dl, .news > dl {
 	margin-bottom: 1em;
@@ -148,14 +137,6 @@ pre {
 }
 
 .news > dl > dd {
-	margin-bottom: 1em;
-}
-
-.bots > * {
-	margin-bottom: 1em;
-}
-
-.bots > div > dl > dd {
 	margin-bottom: 1em;
 }
 
@@ -211,12 +192,3 @@ pre {
     width: auto;
 }
 
-.gameboard, .eclipse {
-	border: none;
-}
-
-.gameboard tr > td > img, .eclipse tr > td > img {
-	border: none;
-	width: 36px;
-	height: auto;
-}
