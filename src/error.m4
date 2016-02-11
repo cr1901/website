@@ -48,10 +48,12 @@
 
 		include(xPAGE)dnl
 
-		<p class="bot" role="contentinfo">
-			last updated xBOT<br/>
-			brought to you by xMAKE
-		</p>
+		<div id="undergirder" role="contentinfo">
+			<p>
+				Last Updated syscmd(`date --rfc-3339=date')<br/>
+				Brought to you by an uncomfortable mix of xMAKE and m4!
+			</p>
+		</div
 
 	</body>
 </html>
