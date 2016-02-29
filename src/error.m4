@@ -9,7 +9,7 @@
 				color: #111;
 				background: #fff;
 				font-size: 0.8em;
-				font-family: "Dejavu Sans", Courier, monospace;
+				font-family: "Courier New", Courier, monospace;
 				text-align: center;
 			}	
 
@@ -48,7 +48,7 @@
 
 		include(xPAGE)dnl
 
-		<div id="undergirder" role="contentinfo">
+		<div class="bot">
 			<p>
 				Last Updated syscmd(`date --rfc-3339=date')<br/>
 				Brought to you by an uncomfortable mix of xMAKE and m4!

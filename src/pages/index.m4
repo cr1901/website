@@ -1,5 +1,10 @@
 <div id="main" role="main">
 	<div class="news">
+	    <h1>2016/02/28</h1>
+	    <p>I have not been well the past few weeks. Getting over a cold that left
+	    a post-viral cough with a vengeance. Updates soon to add more floppy blog posts
+	    as well as some <a href="https://jupyter.org">Jupyter</a> notebooks on a
+	    variety of subjects.</p>
 	    <h1>2016/02/11</h1>
 	    <p>I have started moving the Retrochallenge floppy disk posts to this
 	    domain, while I am currently unable to work on the FPGA controller;

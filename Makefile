@@ -179,8 +179,8 @@ build/blog/%.html: staging/blog/%.html
 build/%.html: staging/pages/%.html assets/css/style.css
 	mkdir -p $(@D)
 	cp -rf assets build
-	ln -sf ../favicon.ico $(@D)
-	ln -sf ../robots.txt $(@D)
+	cp -f favicon.ico $(@D)
+	cp -f robots.txt $(@D)
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
