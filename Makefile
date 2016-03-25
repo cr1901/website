@@ -103,15 +103,16 @@ staging/sitemap/blog/%: src/blog/%.m4 $(sitemap_block)
 
 staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	mkdir -p $(@D)
-	
+
 	$(eval stem := $(basename $(<F)))
-	$(eval pretty_name := $(shell [[ $(stem) == 'index' ]] && \
-		echo 'home' || ([[ $(stem) == 'blog' ]] && \
-		echo 'Anachronism' || ([[ $(stem) == 'makefile' ]] && \
-		echo 'make' || echo $(stem)))))
+	$(eval pretty_name := $(shell [[ $(stem) == 'index' ]] && echo 'Home' || \
+		([[ $(stem) == 'blog' ]] && echo 'Anachronism' || \
+		([[ $(stem) == 'about' ]] && echo 'About' || \
+		([[ $(stem) == 'makefile' ]] && echo 'make' || \
+		echo $(stem))))))
 	$(eval href_name := $(shell [[ $(stem) == 'index' ]] && \
 		echo '/' || echo $(stem).html))
-	
+
 	m4 -D xTITLE='<title>WDJ - "$(pretty_name)"</title>' \
 		-D xNAV=$(html_nav) \
 		-D xBLOGNAV=$(blog_nav) \
@@ -119,16 +120,16 @@ staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
 		-D xMAKE='<a href="makefile.html">make</a>' $(html_base) | \
-	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|$(pretty_name)|g' \
+	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' \
 		-e 's/^\s*//' > $@
-	
+
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 staging/pages/%.html: src/errors/%.m4 $(error_base)
 	mkdir -p $(@D)
-	
+
 	$(eval stem := $(basename $(<F)))
-	
+
 	m4 -D xTITLE='<title>WDJ - $(stem)</title>' \
 		-D xH1='<h1>$(stem)</h1>' \
 		-D xPAGE=$< \
@@ -136,14 +137,14 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 		-D xBOT=$(shell $(now)) \
 		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) | \
 	sed -e 's/^\s*//' > $@
-	
+
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 staging/blog/%.html: src/blog/%.m4 $(blog_base)
 	mkdir -p $(@D)
-	
+
 	$(eval stem := $(basename $(<F)))
-	
+
 	# TODO: Don't hardcode blog
 	m4 -D xTITLE='<title>WDJ - $(stem)</title>' \
 		-D xNAV=$(html_nav) \
@@ -153,7 +154,7 @@ staging/blog/%.html: src/blog/%.m4 $(blog_base)
 		-D xBOT=$(shell $(now)) \
 		-D xMAKE='<a href="makefile.html">make</a>' $(blog_base) | \
 	sed -e 's/^\s*//' > $@
-	
+
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 ###########
@@ -171,7 +172,7 @@ $(make_out): $(make_page_staging) $(makefile_staging)
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 # TODO: Any way to put this into the build/%.html target?
-build/blog/%.html: staging/blog/%.html
+build/blog/%.html: staging/blog/%.html assets/css/style.css
 	mkdir -p $(@D)
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
@@ -190,13 +191,13 @@ build/%.html: staging/pages/%.html assets/css/style.css
 ###########
 
 # TODO: Don't hardcode blog... oh you get the point.
-localhref:
+localhref: all
 	for f in build/*.html build/blog/*.html; do \
 		sed -i 's|^\(<base href="\)$(domain)\(">\)|\1F:/Consult/website/build/\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to local\n"
 
-remotehref:
+remotehref: all
 	for f in build/*.html build/blog/*.html; do \
 		sed -i 's|^\(<base href="\)F:/Consult/website/build/\(">\)$$|\1$(domain)\2|' $$f; \
 		done

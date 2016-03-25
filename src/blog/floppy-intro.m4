@@ -1,6 +1,9 @@
 define(`STRIKE', <span class="strike">$1</span>)
 
 <div id="main" role="main">
+<div class="notice"><em>This post needs to be cleaned up a bit, and more pictures/visual aids added.
+Some knowledge of basic physics is required to fill in the missing visual aids
+in the interim (2016/3/24).</em></div>
 <h1>Floppy Disk Theory of Operation- Overview</h1>
 <h2>So... Why?</h2>
 <p>Floppy disks are a STRIKE(dying) dead medium. Once upon a time, they were used
@@ -23,9 +26,9 @@ from playing with microcontrollers and peripherals today, where there is usually
 I2C or SPI to interface to the hardware-specific circuitry! And unfortunately,
 because floppy disks have been obsolete for some time, getting information on
 floppy drive physics and operation is also difficult.</p>
-<p>I hope to change that a bit. This series of blog posts will discuss details on 
-floppy disk operation based upon documentation I have found/been pointed to over 
-the past year. For now, I will be focusing on IBM PC-compatible floppy disks of 
+<p>I hope to change that a bit. This series of blog posts will discuss details on
+floppy disk operation based upon documentation I have found/been pointed to over
+the past year. For now, I will be focusing on IBM PC-compatible floppy disks of
 the Single and Double Density kind (read: the kind that came with your XT or 286).
 It will culminate with a <em>proof of concept</em> IBM PC floppy disk controller via FPGA.</p>
 <p>An electronics enthusiast with knowledge in either FPGAs or microcontroller programming,
@@ -46,16 +49,16 @@ to restore the magnetic flux to its original condition.</p>
 <p>Controlling the rate at which the magnetic flux changes direction (not just intensity),
 and measuring it's effect on charged particles forms the fundamentals of storing
 and retrieving data with a floppy disk.</p>
-<p>A circuit known as a Read/Write head creates a voltage from sensing a change in flux. 
-This voltage is maximized at the boundaries where the magnetic field completely 
-changes direction. The points in time at which flux transitions occur, 
-and amount of flux transitions (changes in direction) compared 
-to a reference amount of elapsed time, determine whether binary 0's or 1's are 
+<p>A circuit known as a Read/Write head creates a voltage from sensing a change in flux.
+This voltage is maximized at the boundaries where the magnetic field completely
+changes direction. The points in time at which flux transitions occur,
+and amount of flux transitions (changes in direction) compared
+to a reference amount of elapsed time, determine whether binary 0's or 1's are
 read. During writes, the R/W coil is energized to create a pattern of magnetic flux
 transitions, which get stored in the form of microscopic currents on the disk material.</p>
 
 <h2>Floppy Geometry</h2>
-<p>Floppy disk material is logically divided into:</p> 
+<p>Floppy disk material is logically divided into:</p>
 <ul>
 <li>tracks</li>
 <li>heads</li>
@@ -63,10 +66,10 @@ transitions, which get stored in the form of microscopic currents on the disk ma
 </ul>
 
 <p>The below image illustrates a diskette (darkest blue), the area swept out by
-1 sector with 8 sectors per track (lighter blue), and the approximate area (I tried, anyway!) 
+1 sector with 8 sectors per track (lighter blue), and the approximate area (I tried, anyway!)
 that consists of a single sector for a single track at 48 tpi (lightest blue). A floppy disk has
 two sides, and a disk controller uses the head number to choose which side to try
-and read or write.</p> 
+and read or write.</p>
 <img alt="An illustration of floppy disk geometry with concentric circles." src="assets/img/floppy_tracks.png">
 <p>The magnetized particles of each track are ideally in the center of each track,
 and are typically separated by regions with no magnetization, so that the R/W
@@ -81,7 +84,7 @@ to another post.</p>
 based on experiments performed by Shugart in the 1970's. Then I will give some
 meaning to the 0's and 1's stored on a floppy disk, as not all the binary data stored
 on the disk material ends up appearing in RAM under normal circumstances. Well, unless
-you have hardware to defeat copy protection :). The 0's and 1's on floppy medium 
+you have hardware to defeat copy protection :). The 0's and 1's on floppy medium
 tend to be stored using specific rules. I will also explain the rationale for
 these rules.</p>
 
