@@ -41,13 +41,6 @@ sitemap_staging := staging/sitemap/index \
 	$(addprefix staging/sitemap/blog/, $(basename $(notdir $(blog_pages))))
 sitemap_out := build/sitemap.xml
 
-# tweet_base := src/twitter/base.m4
-# tweet_pages := $(wildcard src/twitter/tweets/*.m4)
-# tweet_staging := $(addprefix staging/tweets/,$(basename $(notdir $(tweet_pages))))
-# bot_page_staging := staging/pages/bots.html
-# bot_gameboard := src/twitter/gameboard.m4
-# bots_out := build/bots.html
-
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
 pretty_datetime = date +%d\ %b\ %H:%M:%S
@@ -120,8 +113,7 @@ staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
 		-D xMAKE='<a href="makefile.html">make</a>' $(html_base) | \
-	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' \
-		-e 's/^\s*//' > $@
+	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
@@ -135,8 +127,7 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) | \
-	sed -e 's/^\s*//' > $@
+		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
@@ -152,8 +143,7 @@ staging/blog/%.html: src/blog/%.m4 $(blog_base)
 		-D xPAGE=$< \
 		-D xJUMPTOP=blog/$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(blog_base) | \
-	sed -e 's/^\s*//' > $@
+		-D xMAKE='<a href="makefile.html">make</a>' $(blog_base) > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
@@ -193,20 +183,20 @@ build/%.html: staging/pages/%.html assets/css/style.css
 # TODO: Don't hardcode blog... oh you get the point.
 localhref: all
 	for f in build/*.html build/blog/*.html; do \
-		sed -i 's|^\(<base href="\)$(domain)\(">\)|\1F:/Consult/website/build/\2|' $$f; \
+		sed -i 's|^\s*\(<base href="\)$(domain)\(">\)|\1F:/Consult/website/build/\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to local\n"
 
 remotehref: all
 	for f in build/*.html build/blog/*.html; do \
-		sed -i 's|^\(<base href="\)F:/Consult/website/build/\(">\)$$|\1$(domain)\2|' $$f; \
+		sed -i 's|^\s*\(<base href="\)F:/Consult/website/build/\(">\)$$|\1$(domain)\2|' $$f; \
 		done
 	printf "($(shell $(pretty_datetime))) base href to remote\n"
 
 deploy:
 	$(MAKE)
 	$(MAKE) remotehref
-	cmd /c "pscp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site"
+	scp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 	$(MAKE) localhref
 
