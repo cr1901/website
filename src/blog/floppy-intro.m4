@@ -70,7 +70,7 @@ transitions, which get stored in the form of microscopic currents on the disk ma
 that consists of a single sector for a single track at 48 tpi (lightest blue). A floppy disk has
 two sides, and a disk controller uses the head number to choose which side to try
 and read or write.</p>
-<img alt="An illustration of floppy disk geometry with concentric circles." src="assets/img/floppy_tracks.png">
+<img alt="An illustration of floppy disk geometry with concentric circles." src="/assets/img/floppy_tracks.png">
 <p>The magnetized particles of each track are ideally in the center of each track,
 and are typically separated by regions with no magnetization, so that the R/W
 head does not sense two conflicting sources of magnetism.</p>

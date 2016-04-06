@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <base href="https://www.wdj-consulting.com/">
         xTITLE
         <style type="text/css">
             body {
