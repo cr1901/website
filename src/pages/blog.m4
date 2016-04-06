@@ -9,8 +9,8 @@ dnl    include(blog/$1.m4)')dnl
     that tickle my fancy. As one might guess from the name, I have a tendency
     to uncomfortably mix the old with the new.</p>
 
-    <div id=3-2016>
-        <h1 class="date">March 2016</h1>
+    <div id=4-2016>
+        <h1 class="date">April 2016</h1>
         <ul class="blog_list">
             DEAD_POST(`floppy-pll', `Floppy Disk Primer IV: MFM Decoder PLL Design')
             DEAD_POST(`floppy-fm', `Floppy Disk Primer III: FM and MFM Encoding')
