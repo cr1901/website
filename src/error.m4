@@ -32,6 +32,14 @@
                 width: 50%;
             }
 
+            a {
+                color: cornflowerblue;
+            }
+
+            a:visited {
+                color: aliceblue;
+            }
+
             .bot {
                 margin 1em 0;
                 padding 1em 0;
