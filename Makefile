@@ -109,6 +109,7 @@ staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	m4 -D xTITLE='<title>WDJ - "$(pretty_name)"</title>' \
 		-D xNAV=$(html_nav) \
 		-D xBLOGNAV=$(blog_nav) \
+		-D xPATH_TO_ROOT=. \
 		-D xPAGE=$< \
 		-D xJUMPTOP=$(@F)'#' \
 		-D xBOT=$(shell $(now)) \
@@ -140,6 +141,7 @@ staging/blog/%.html: src/blog/%.m4 $(blog_base)
 	m4 -D xTITLE='<title>WDJ - $(stem)</title>' \
 		-D xNAV=$(html_nav) \
 		-D xBLOGNAV=$(blog_nav) \
+		-D xPATH_TO_ROOT=.. \
 		-D xPAGE=$< \
 		-D xJUMPTOP=blog/$(@F)'#' \
 		-D xBOT=$(shell $(now)) \

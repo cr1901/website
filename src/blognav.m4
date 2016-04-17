@@ -1,4 +1,4 @@
-define(`MONTH', `<li><a href="/blog.html#$1-$2">$1-$2</a></li>')dnl
+define(`MONTH', `<li><a href="xPATH_TO_ROOT/blog.html#$1-$2">$1-$2</a></li>')dnl
 
 <div id="side" role="complementary">
     <ul>
