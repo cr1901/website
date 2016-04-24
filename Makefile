@@ -28,6 +28,7 @@ blog_pages := $(wildcard src/blog/*.m4)
 # TODO: DO not hardcode blog prefix?
 blog_out:= $(addprefix build/blog/,$(notdir $(blog_pages:%.m4=%.html)))
 
+# Special handling.
 makefile_staging := staging/makefile
 make_page_staging := staging/pages/makefile.html
 make_out := build/makefile.html
@@ -40,6 +41,10 @@ sitemap_staging := staging/sitemap/index \
 		$(filter-out index,$(basename $(notdir $(html_pages))))) \
 	$(addprefix staging/sitemap/blog/, $(basename $(notdir $(blog_pages))))
 sitemap_out := build/sitemap.xml
+
+blog_landing_staging := staging/pages/blog.html
+blog_landing_out := build/blog.html
+
 
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
@@ -100,8 +105,9 @@ staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 	$(eval stem := $(basename $(<F)))
 	$(eval pretty_name := $(shell [[ $(stem) == 'index' ]] && echo 'Home' || \
 		([[ $(stem) == 'about' ]] && echo 'About' || \
+		([[ $(stem) == 'blog' ]] && echo 'Anachronism' || \
 		([[ $(stem) == 'makefile' ]] && echo 'Make' || \
-		echo $(stem)))))
+		echo $(stem))))))
 	$(eval href_name := $(shell [[ $(stem) == 'index' ]] && \
 		echo '/' || echo $(stem).html))
 
@@ -123,6 +129,7 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 	m4 -D xTITLE='<title>WDJ - $(stem)</title>' \
 		-D xH1='<h1>$(stem)</h1>' \
 		-D xPAGE=$< \
+		-D xPATH_TO_ROOT=.. \
 		-D xBOT=$(shell $(now)) \
 		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(error_base) > $@
 
@@ -144,23 +151,6 @@ staging/blog/%.html: src/blog/%.m4 $(blog_base) $(blog_nav)
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
-# Pages with special dependencies.
-staging/pages/blog.html: src/pages/blog.m4  $(html_base) $(html_nav) $(blog_nav)
-	mkdir -p $(@D)
-
-	$(eval stem := $(basename $(<F)))
-	$(eval pretty_name := 'Anachronism')
-	$(eval href_name := $(stem).html)
-
-	m4 -D xTITLE='<title>WDJ - "$(pretty_name)"</title>' \
-		-D xNAV=$(html_nav) \
-		-D xBLOGNAV=$(blog_nav) \
-		-D xPATH_TO_ROOT=. \
-		-D xPAGE=$< \
-		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(html_base) | \
-	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' > $@
-
 
 ###########
 #  build  #
@@ -174,6 +164,12 @@ $(sitemap_out): $(sitemap_first) $(sitemap_staging) $(sitemap_last)
 $(make_out): $(make_page_staging) $(makefile_staging)
 	mkdir -p $(@D)
 	m4 -D xMAKEFILE=$(makefile_staging) $< > $@
+	printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+$(blog_landing_out): $(blog_landing_staging) $(blog_nav)
+	mkdir -p $(@D)
+	m4 -D xBLOGNAV=$(blog_nav) \
+		-D xPATH_TO_ROOT=. $< > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 # TODO: Any way to put this into the build/%.html target?
@@ -196,10 +192,8 @@ build/%.html: staging/pages/%.html assets/css/style.css
 ###########
 deploy:
 	$(MAKE)
-	$(MAKE) remotehref
 	scp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
-	$(MAKE) localhref
 
 unstage:
 	rm -rf staging/

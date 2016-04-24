@@ -1,4 +1,4 @@
-dnl define(`xBLOGNAV', ``include(xBLOGNAV)'')dnl
+define(`xBLOGNAV', ``include(xBLOGNAV)''')
 define(`POST', `<li><a href="blog/$1.html">$2</a></li>')dnl
 define(`DEAD_POST', `<li>$2</li>')dnl
 dnl    include(blog/$1.m4)')dnl
@@ -27,4 +27,4 @@ dnl    include(blog/$1.m4)')dnl
     </div>
 </div>
 
-include(xBLOGNAV)
+xBLOGNAV

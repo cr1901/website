@@ -13,7 +13,7 @@
 
             include(xPAGE)dnl
 
-            include(xBLOGNAV)dnl
+            include(xBLOGNAV)
         </div>
 
         <div id="jumptop"><a href="#">[top]</a></div>
