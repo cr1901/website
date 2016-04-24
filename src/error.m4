@@ -3,11 +3,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         xTITLE
+        <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
         <style type="text/css">
             body {
-                background: lightsteelblue;
                 font-size: 0.8em;
-                font-family: "Courier New", Courier, monospace;
+                line-height: normal;
                 text-align: center;
             }
 
@@ -18,34 +18,17 @@
             }
 
             img {
-                border: 1px solid steelblue;
-                max-height: 480px;
+                max-width: 100%;
             }
 
             p {
                 margin: 0.5em 0;
-                }
+            }
 
             .text {
                 margin: 0 auto;
                 text-align: center;
                 width: 50%;
-            }
-
-            a {
-                color: cornflowerblue;
-            }
-
-            a:visited {
-                color: aliceblue;
-            }
-
-            .bot {
-                margin 1em 0;
-                padding 1em 0;
-                text-align: center;
-                font-size: 0.7em;
-                font-style: italic;
             }
         </style>
     </head>
@@ -55,7 +38,7 @@
 
         include(xPAGE)dnl
 
-        <div class="bot">
+        <div id="undergirder" role="contentinfo">
             <p>
                 Last Updated syscmd(`date --rfc-3339=date')<br/>
                 Brought to you by an uncomfortable mix of xMAKE and m4!
