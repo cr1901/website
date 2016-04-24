@@ -110,7 +110,7 @@ staging/pages/%.html: src/pages/%.m4 $(html_base) $(html_nav)
 		-D xPATH_TO_ROOT=. \
 		-D xPAGE=$< \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(html_base) | \
+		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(html_base) | \
 	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
@@ -124,7 +124,7 @@ staging/pages/%.html: src/errors/%.m4 $(error_base)
 		-D xH1='<h1>$(stem)</h1>' \
 		-D xPAGE=$< \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(error_base) > $@
+		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(error_base) > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
@@ -140,7 +140,7 @@ staging/blog/%.html: src/blog/%.m4 $(blog_base) $(blog_nav)
 		-D xPATH_TO_ROOT=.. \
 		-D xPAGE=$< \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(blog_base) > $@
+		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(blog_base) > $@
 
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
@@ -158,7 +158,7 @@ staging/pages/blog.html: src/pages/blog.m4  $(html_base) $(html_nav) $(blog_nav)
 		-D xPATH_TO_ROOT=. \
 		-D xPAGE=$< \
 		-D xBOT=$(shell $(now)) \
-		-D xMAKE='<a href="makefile.html">make</a>' $(html_base) | \
+		-D xMAKE='<a href="xPATH_TO_ROOT\makefile.html">make</a>' $(html_base) | \
 	sed -e 's|<a href="$(href_name)">$(pretty_name)</a>|<span id="curr_section">$(pretty_name)</span>|g' > $@
 
 
