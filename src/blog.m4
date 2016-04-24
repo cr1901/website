@@ -16,7 +16,7 @@
             include(xBLOGNAV)dnl
         </div>
 
-        <div id="jumptop"><a href="xJUMPTOP">[top]</a></div>
+        <div id="jumptop"><a href="#">[top]</a></div>
 
         <div id="undergirder" role="contentinfo">
             <p>
