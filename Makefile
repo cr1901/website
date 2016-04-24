@@ -45,6 +45,15 @@ sitemap_out := build/sitemap.xml
 blog_landing_staging := staging/pages/blog.html
 blog_landing_out := build/blog.html
 
+css := $(wildcard assets/css/*.css)
+images := $(wildcard assets/img/*.*)
+# audio := $(wildcard assets/snd/*.*)
+# video := $(wildcard assets/vid/*.*)
+assets_out := $(addprefix build/assets/css/,$(notdir $(css))) \
+	$(addprefix build/assets/img/,$(notdir $(images))) # \
+	# $(addprefix build/assets,$(notdir $(audio))) \
+	# $(addprefix build/assets,$(notdir $(video))) \
+
 
 now = date --rfc-3339=date
 last_mod = $(now) -r $(1)
@@ -58,7 +67,7 @@ pretty_datetime = date +%d\ %b\ %H:%M:%S
 #  make   #
 ###########
 
-all: $(html_out) $(error_out) $(blog_out) $(sitemap_out)
+all: $(html_out) $(error_out) $(blog_out) $(sitemap_out) $(assets_out)
 
 
 ###########
@@ -173,18 +182,27 @@ $(blog_landing_out): $(blog_landing_staging) $(blog_nav)
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
 # TODO: Any way to put this into the build/%.html target?
-build/blog/%.html: staging/blog/%.html assets/css/style.css
+build/blog/%.html: staging/blog/%.html
 	mkdir -p $(@D)
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
 
-build/%.html: staging/pages/%.html assets/css/style.css
+build/%.html: staging/pages/%.html
 	mkdir -p $(@D)
-	cp -rf assets build
 	cp -f favicon.ico $(@D)
 	cp -f robots.txt $(@D)
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+build/assets/css/%.css: assets/css/%.css
+	mkdir -p $(@D)
+	cp -r $< $@
+	printf "($(shell $(pretty_datetime))) copied $(@F)\n"
+
+build/assets/img/%: assets/img/%
+	mkdir -p $(@D)
+	cp -r $< $@
+	printf "($(shell $(pretty_datetime))) copied $(@F)\n"
 
 
 ###########
@@ -200,7 +218,7 @@ unstage:
 	printf "($(shell $(pretty_datetime))) unmade staging/\n"
 
 unbuild:
-	rm -rf build/
+	rm -rf build/*
 	printf "($(shell $(pretty_datetime))) unmade build/\n"
 
 clean:
