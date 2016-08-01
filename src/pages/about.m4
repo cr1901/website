@@ -1,9 +1,11 @@
 define(`LIST_HEADER', <dt><span class="contact-key">$1</span></dt>)dnl
 
 <div id="main" role="main">
-
     <p>
-        I've been told to "Do Good Things." Occasionally I've even been told that I succeed in this endeavor. Electronics Hobbyist. Programmer. Freelancer. Interested in the days past where DIP chips reigned supreme.
+        I've been told to "Do Good Things."
+        Occasionally I've even been told that I succeed in this endeavor.
+        Electronics Hobbyist. Programmer. Freelancer. Interested in the days
+        past where DIP chips reigned supreme.
     </p>
     <p>
         The meaning of my handle (cr1901) is lost to time. On Unix machines, I try to use the name <i>wjones</i>.

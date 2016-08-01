@@ -30,3 +30,6 @@ define(`DATE', `<h1 class="date">$1</h1>')dnl
         <p>Yes, more m4 fun for all :D!</p>
     </div>
 </div>
+
+<div id="side" role="complementary">
+</div>

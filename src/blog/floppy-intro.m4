@@ -11,19 +11,17 @@ for synths, oscilloscopes, cartridge copiers- you name it! But you don't see new
 made with them nowadays; even hobbyists are likely to use SD cards or Compact Flash
 for mass storage for their electronics projects.</p>
 <p>So why bother learning how they work? Well, I can think of two reasons:</p>
-<ol>
+<ul>
 <li>Preservation of old software and data at risk of being lost forever.</li>
 <li>Morbid curiosity.</li>
-</ol>
+</ul>
 <p>I fall into both categories to an extent, but mostly the latter. However,
 I have found that information on how to actually read disks without a computer
 is sporadic.</p>
 <p>Floppy disks are not like SD cards. There is no nice protocol like
 SPI where you ask the drive for a particular region of data, and the drive sends
 the requested data back in nice byte format. Getting data from a drive to a
-representation suitable for computer RAM is involved. It's definitely different
-from playing with microcontrollers and peripherals today, where there is usually
-I2C or SPI to interface to the hardware-specific circuitry! And unfortunately,
+representation suitable for computer RAM is involved. And unfortunately,
 because floppy disks have been obsolete for some time, getting information on
 floppy drive physics and operation is also difficult.</p>
 <p>I hope to change that a bit. This series of blog posts will discuss details on
@@ -56,14 +54,31 @@ and amount of flux transitions (changes in direction) compared
 to a reference amount of elapsed time, determine whether binary 0's or 1's are
 read. During writes, the R/W coil is energized to create a pattern of magnetic flux
 transitions, which get stored in the form of microscopic currents on the disk material.</p>
+<p class="aside">
+In this article, I use "R/W coil" and "set of R/W coils" interchangeably. Later, I will
+show that R/W coils tend to be composed of three separate coils of wire: one for reading,
+another for writing, and yet another for erasing.
+</p>
 
 <h2>Floppy Geometry</h2>
-<p>Floppy disk material is logically divided into:</p>
-<ul>
-<li>tracks</li>
-<li>heads</li>
-<li>sectors</li>
-</ul>
+<p>Floppy disk material is logically divided into at least three different units:</p>
+<dl>
+<dt>heads</dt>
+<dd>A floppy disk drive is designed such that both sides of a floppy disk material
+can be read or written by using multiple R/W coils. Each set of coils is attached
+to an assembly within the floppy disk drive known as a head. In practice, the current side
+being read or written is referenced by which head's coils are activated.</dd>
+<dt>tracks</dt>
+<dd>Data on a floppy disk surface is not spread evenly out across the disk surface. Rather,
+magnetic transitions are concentrated on circles of specific radii away from the center hub of the disk.
+These circles are called tracks. Data is written/read as magnetic transitions on the track pass under the head assembly.
+Tracks form concentric circles, where the <a href="http://mathworld.wolfram.com/Annulus.html">annuli</a> do not
+meaningfully contribute to net magnetization. For our floppy disk format, there are 40 tracks.</dd>
+<dt>sectors</dt>
+<dd>Tracks themselves are divided into units of a set number of bytes each, each called
+a sector. The number of sectors per track for a floppy disk is configurable in software to support
+various formats. The name sector is analogous to the geometric concept.</dd>
+</dl>
 
 <p>The below image illustrates a diskette (darkest blue), the area swept out by
 1 sector with 8 sectors per track (lighter blue), and the approximate area (I tried, anyway!)

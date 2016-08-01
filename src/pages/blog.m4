@@ -13,7 +13,7 @@ dnl    include(blog/$1.m4)')dnl
         <h1 class="date">April 2016</h1>
         <ul class="blog_list">
             DEAD_POST(`floppy-pll', `Floppy Disk Primer IV: MFM Decoder PLL Design')
-            DEAD_POST(`floppy-fm', `Floppy Disk Primer III: FM and MFM Encoding')
+            POST(`floppy-fm', `Floppy Disk Primer III: FM and MFM Encoding')
             DEAD_POST(`floppy-tf', `Floppy Disk Primer II: R/W Head Transfer Function')
         </ul>
     </div>
