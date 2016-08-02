@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         xTITLE
         <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
         <style type="text/css">
@@ -12,13 +13,13 @@
             }
 
             h1 {
-                color: steelblue;
                 font-size: 4em;
                 margin: 0.25em;
             }
 
             img {
-                max-width: 100%;
+                width: 100%;
+                max-width: 640px;
             }
 
             p {
@@ -28,7 +29,6 @@
             .text {
                 margin: 0 auto;
                 text-align: center;
-                width: 50%;
             }
         </style>
     </head>

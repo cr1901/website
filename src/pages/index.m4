@@ -1,6 +1,20 @@
 define(`DATE', `<h1 class="date">$1</h1>')dnl
 
 <div id="main" role="main">
+    <div class="intro">
+        <p>Hello, my name is William Jones. I go by the handle <em>cr1901</em>
+        on most websites. I have a B.S. in electrical computer engineering (ECE),
+        and am currently freelancing. I am open to consulting work such as
+        software programming, including adding features to open source code bases,
+        and hardware design, such as verification of HDL using simulators or FPGAS.
+        Some of the projects I have worked on on a consulting basis can be found
+        <a href="./consult.html">here</a>.</p>
+
+        <p>I also use this website to discuss my hobbyist pursuits, via
+        the blog <a href="./blog.html">Anachronism</a>. As perhaps expected,
+        most of my endeavors are electronics-based, but have some vintage
+        element to them.</p>
+    </div>
     <div class="news">
         DATE(2016/03/24)
         <p>Been putting off updating the site because I needed to overhaul the

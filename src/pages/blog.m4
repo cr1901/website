@@ -12,9 +12,9 @@ dnl    include(blog/$1.m4)')dnl
     <div id=4-2016>
         <h1 class="date">April 2016</h1>
         <ul class="blog_list">
-            DEAD_POST(`floppy-pll', `Floppy Disk Primer IV: MFM Decoder PLL Design')
-            POST(`floppy-fm', `Floppy Disk Primer III: FM and MFM Encoding')
-            DEAD_POST(`floppy-tf', `Floppy Disk Primer II: R/W Head Transfer Function')
+            dnl DEAD_POST(`floppy-pll', `Floppy Disk Primer IV: MFM Decoder PLL Design')
+            dnl POST(`floppy-fm', `Floppy Disk Primer III: FM and MFM Encoding')
+            dnl DEAD_POST(`floppy-tf', `Floppy Disk Primer II: R/W Head Transfer Function')
         </ul>
     </div>
 
@@ -22,7 +22,7 @@ dnl    include(blog/$1.m4)')dnl
         <h1 class="date">February 2016</h1>
         <ul class="blog_list">
             POST(`floppy-intro', `Floppy Disk Primer I: Overview')
-            POST(`floppy-lit', `Floppy Disk Primer Nulla: Literature')
+            dnl POST(`floppy-lit', `Floppy Disk Primer Nulla: Literature')
         </ul>
     </div>
 </div>
