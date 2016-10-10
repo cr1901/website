@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Anachronism Enthusiast">
         xTITLE
-        <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
+        <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/normalize.css">
     </head>
     <body>
 
