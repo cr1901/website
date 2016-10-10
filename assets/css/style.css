@@ -1,313 +1,19 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    /* background: aliceblue; */
     font-size: 1em;
     line-height: 1.4em;
     font-family: "Courier New", Courier, monospace;
 }
 
-
-p {
-    margin: 1em 0.5em;
-}
-
-h1 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-    /* color: steelblue; */
-}
-
-h1.date {
-    /* color: aliceblue; */
-    /* background: lightsteelblue; */
-}
-
-h2, h3 {
-    /* font-size: 1.25em; */
-    margin-bottom: 0.5em;
-    /* color: ghostwhite; */
-    /* background: lightsteelblue; */
-}
-
-h3 {
-    font-size: 1.0em;
-}
-
-#main img {
-    /* border: 1px solid cornflowerblue; */
-    float: left;
-    margin-right: 1em;
-}
-
-#main {
-    /* background: gainsboro; */
-    max-width: 1280px;
-    margin-top: 2em;
-}
-
-#nav > ul, #side > ul {
-    margin-left: 0.5em;
-    list-style-type: none;
-    font-size: 1.25em;
-}
-
-#nav a, #side a {
-    text-decoration: none;
-}
-
-#nav > h1 {
-    /* color: ghostwhite; */
-}
-
-#nav > ul > li, #side > ul > li {
-    margin: 0.25em 0;
-    /* color: black; */
-    /* border-bottom: 1px black solid; */
-}
-
-#nav > ul > hr, #side > ul > hr {
-    margin: 1em 3em 0.5em 0;
-}
-
-/* p.page_desc {
-    font-size: 1.25em;
-} */
-
-ul, ol {
-    list-style-position: inside;
-}
-
-dt {
-    margin: 0.25em 0;
-    font-weight: bold;
-    /* font-size: 1.25em;
-}
-
-dd {
-    margin-left: 1em;
-}
-
-pre {
-    padding: 0 1em;
-    border: thin ridge;
-    line-height: 1.1em!important;
-    border-radius: 1em;
-    /* background-/* color: ghostwhite; */
-}
-
-a {
-    /* color: cornflowerblue; */
-}
-
-a:visited {
-    /* color: steelblue; */
-}
-
-
-#nav, #side {
-    /* background-/* color: lightsteelblue; */
-    padding: 1em;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: content;
-    margin-top: 2em;
-}
-
-#nav {
-    padding-right: 1em;
-    padding-left: 2em;
-
-}
-
-#curr_section {
-    /* color: steelblue; */
-}
-
-#side {
-    padding-right: 2em;
-    padding-left: 1em;
-    text-align: right;
-}
-
-#main {
-    padding-top: 2em;
-    padding: 1em;
-    flex-grow: 3;
-    flex-shrink: 1;
-    flex-basis: content;
-    /* border-radius: 1em; */
-    /* background-/* color: lavender; */
-}
-
-#jumptop {
-    text-align: center;
-}
-
-#undergirder {
-    margin 1em 0;
-    padding 1em 0;
-    text-align: center;
-    font-size: 0.7em;
-    line-height: 1.1em;
-    font-style: italic;
-}
-
-#me-img > img {
-    border: none;
+.container {
+    display: inline-flex;
+    flex-wrap: no-wrap;
     width: 100%;
-    max-width: 360px;
-}
-
-
-#blog-sidebar > ul {
-    list-style-type: inherit;
-}
-
-#main-img > img {
-    width: 75%;
-    height: auto;
-}
-
-p.aside::before {
-    content: 'Aside: ';
-    font-style: italic;
-    font-weight: bold;
-    color: steelblue;
-}
-
-p.aside {
-    float: right;
-    width: 30%;
-    font-style: italic;
-    background-color: aliceblue;
-}
-
-.news, .text-dump {
-    /* margin-right: 10em; */
-}
-
-
-/* Blog settings. */
-.strike {
-    text-decoration: line-through;
-}
-
-.notice {
-    margin-bottom: 1.5em;
-    background-color: antiquewhite;
-    padding: 1em;
-}
-
-.notice::before {
-    content: 'Notice: ';
-    font-style: italic;
-    font-weight: bold;
-    color: firebrick;
-}
-
-.waveform {
-    /* background-/* color: ghostwhite; */
-    border-radius: 1em;
-    border-width: thin;
-    border: ridge;
-    margin-bottom: 1em;
-}
-
-.waveform > pre {
-    border-top-/* color: gainsboro; */
-    border-radius: 0;
-    max-height: 20em;
-    overflow: scroll;
-    word-break: normal !important;
-    word-wrap: normal !important;
-    white-space: pre !important;
-}
-
-.waveform > figcaption {
-    font-size: 0.7em;
-}
-
-/* Blog navigation settings. */
-.blognav {
-    position: relative;
-}
-
-.blognav ul {
-    padding: 0.5em;
-    list-style-type: none;
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    right: 100%;
-    width: 300%;
-    /* background: cornflowerblue; */
-    transition: all .25s ease;
-}
-
-.blognav h1 {
-    /* background: inherit; */
-    padding-bottom: 0.5em;
-    margin-bottom: 0;
-}
-
-.blognav ul li {
-    text-align: left;
-}
-
-.blognav ul li a {
-    text-align: left;
-    /* color: lightsteelblue; */
-}
-
-.blognav ul li a:visited {
-    text-align: left;
-    /* color: aliceblue; */
-}
-
-.blognav:hover {
-    /* background: steelblue; */
-}
-
-.blognav:hover ul {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-/* TODO come up with a better way of organizing dl styles */
-
-.contact > dl, .news > dl {
-    margin-bottom: 1em;
-    margin-left: 2em;
-}
-.contact-key {
-  /* color: ghostwhite; */
-  /* background: cornflowerblue; */
-}
-
-.news > dl > dd {
-    margin-bottom: 1em;
-}
-
-.git-icon {
-    border: none;
-    margin-bottom: -4px;
-    height: 1em;
-    width: auto;
 }
 
 
 @media (max-width: 1023px) {
     .container {
-        display: inline-flex;
         flex-direction: column;
-        flex-wrap: no-wrap;
-        width: 100%;
     }
 
     #nav:first-child {
@@ -331,9 +37,13 @@ p.aside {
 
 @media (min-width: 1024px) {
     .container {
-        display: inline-flex;
         flex-direction: row;
-        flex-wrap: no-wrap;
-        width: 100%;
     }
+}
+
+#nav, #side {
+    padding: 1em;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: content;
 }

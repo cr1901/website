@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         xTITLE
         <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/normalize.css">
+        <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
         <style type="text/css">
             body {
                 font-size: 0.8em;

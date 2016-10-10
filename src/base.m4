@@ -6,6 +6,7 @@
         <meta name="description" content="Anachronism Enthusiast">
         xTITLE
         <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/normalize.css">
+        <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
     </head>
     <body>
 
