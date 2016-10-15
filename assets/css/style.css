@@ -4,6 +4,14 @@ body {
     font-family: "Courier New", Courier, monospace;
 }
 
+img {
+    max-width:100%;
+}
+
+table {
+    margin: 2em auto;
+}
+
 .container {
     display: inline-flex;
     flex-wrap: no-wrap;
@@ -23,15 +31,12 @@ body {
     #nav li {
         padding-right: 1em;
         float: left;
+        list-style-type: none;
     }
 
     p.aside {
         float: none;
         width: auto;
-    }
-
-    img {
-        max-width:100%;
     }
 }
 
@@ -46,4 +51,8 @@ body {
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: content;
+}
+
+#jumptop, #undergirder {
+    text-align: center;
 }

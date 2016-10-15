@@ -47,10 +47,12 @@ blog_landing_out := build/blog.html
 
 css := $(wildcard assets/css/*.css)
 images := $(wildcard assets/img/*.*)
+nmos := $(wildcard assets/img/nmos/*.*)
 # audio := $(wildcard assets/snd/*.*)
 # video := $(wildcard assets/vid/*.*)
 assets_out := $(addprefix build/assets/css/,$(notdir $(css))) \
-	$(addprefix build/assets/img/,$(notdir $(images))) # \
+	$(addprefix build/assets/img/,$(notdir $(images))) \
+	$(addprefix build/assets/img/nmos/,$(notdir $(nmos))) # \
 	# $(addprefix build/assets,$(notdir $(audio))) \
 	# $(addprefix build/assets,$(notdir $(video))) \
 
@@ -204,13 +206,18 @@ build/assets/img/%: assets/img/%
 	cp -r $< $@
 	printf "($(shell $(pretty_datetime))) copied $(@F)\n"
 
+build/assets/img/nmos/%: assets/img/nmos/%
+	mkdir -p $(@D)
+	cp -r $< $@
+	printf "($(shell $(pretty_datetime))) copied $(@F)\n"
+
 
 ###########
 #  tasks  #
 ###########
 deploy:
 	$(MAKE)
-	scp -r build/* freebsd@wdj-consulting.com:/usr/local/www/site
+	pscp -r build/* freebsd@www.wdj-consulting.com:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 unstage:

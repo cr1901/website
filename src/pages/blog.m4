@@ -12,7 +12,7 @@ dnl    include(blog/$1.m4)')dnl
     <div id=10-2016>
         <h1 class="date">October 2016</h1>
         <ul class="blog_list">
-            DEAD_POST(`nmos-sample', `NMOS IC Reverse Engineering Sample')
+            POST(`nmos-sample', `NMOS IC Reverse Engineering Sample')
         </ul>
     </div>
 
