@@ -45,12 +45,18 @@ sitemap_out := build/sitemap.xml
 blog_landing_staging := staging/pages/blog.html
 blog_landing_out := build/blog.html
 
+my_css := assets/css/style.m4
+my_css_staging :=  staging/assets/css/style.css
+my_css_out := build/assets/css/style.css
+
+
 css := $(wildcard assets/css/*.css)
 images := $(wildcard assets/img/*.*)
 nmos := $(wildcard assets/img/nmos/*.*)
 # audio := $(wildcard assets/snd/*.*)
 # video := $(wildcard assets/vid/*.*)
 assets_out := $(addprefix build/assets/css/,$(notdir $(css))) \
+	$(my_css_out) \
 	$(addprefix build/assets/img/,$(notdir $(images))) \
 	$(addprefix build/assets/img/nmos/,$(notdir $(nmos))) # \
 	# $(addprefix build/assets,$(notdir $(audio))) \
@@ -79,6 +85,11 @@ all: $(html_out) $(error_out) $(blog_out) $(sitemap_out) $(assets_out)
 $(makefile_staging): $(makefile)
 	mkdir -p $(@D)
 	sed 's/</\&lt;/g;s/>/\&gt;/g;' $< > $@
+	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
+
+staging/assets/css/%.css: assets/css/style.m4
+	mkdir -p $(@D)
+	m4 $< > $@
 	printf "($(shell $(pretty_datetime))) staged $(@F)\n"
 
 staging/sitemap/index: $(html_index) $(sitemap_block)
@@ -182,6 +193,11 @@ $(blog_landing_out): $(blog_landing_staging) $(blog_nav)
 	m4 -D xBLOGNAV=$(blog_nav) \
 		-D xPATH_TO_ROOT=. $< > $@
 	printf "($(shell $(pretty_datetime))) made $(@F)\n"
+
+$(my_css_out): $(my_css_staging)
+	mkdir -p $(@D)
+	cp -r $< $@
+	printf "($(shell $(pretty_datetime))) copied $(@F)\n"
 
 # TODO: Any way to put this into the build/%.html target?
 build/blog/%.html: staging/blog/%.html

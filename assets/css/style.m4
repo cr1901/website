@@ -1,3 +1,6 @@
+/* vim: ft=css */
+/* -*- mode: css -*- */
+
 body {
     font-size: 1em;
     line-height: 1.4em;
