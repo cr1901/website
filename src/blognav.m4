@@ -10,8 +10,8 @@ define(`DEAD_POST', `<li>$2</li>')dnl
         MONTH(4, 2016)
         MONTH(2, 2016)
     </ul>
-
-<!-- <div class="blognav" id=4-2016>
+divert(-1)dnl
+<div class="blognav" id=4-2016>
     MONTH(4, 2016)
     <ul class="blog_list">
         DEAD_POST(`floppy-pll', `Floppy Disk Primer IV: MFM Decoder PLL Design')
@@ -26,5 +26,6 @@ define(`DEAD_POST', `<li>$2</li>')dnl
         POST(`floppy-intro', `Floppy Disk Primer I: Overview')
         POST(`floppy-lit', `Floppy Disk Primer Nulla: Literature')
     </ul>
-</ol>  -->
+</ol>
+divert(0)dnl
 </div>

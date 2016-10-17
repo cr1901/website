@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="xPATH_TO_ROOT/assets/css/style.css">
     </head>
     <body>
-
         <div class="container">
             include(xNAV)dnl
 
@@ -24,6 +23,5 @@
                 Brought to you by an uncomfortable mix of xMAKE and m4!
             </p>
         </div>
-
     </body>
 </html>
