@@ -15,7 +15,7 @@ define(`DATE', `<h1 class="date">$1</h1>')dnl
         most of my endeavors are electronics-based, but have some vintage
         element to them.</p>
     </div>
-    <div class="news">
+    <!-- <div class="news">
         DATE(2016/03/24)
         <p>Been putting off updating the site because I needed to overhaul the
         CSS. Now that a majority of CSS-tweaking is done, now I can go back to
@@ -42,7 +42,7 @@ define(`DATE', `<h1 class="date">$1</h1>')dnl
         Retrochallenge project</a> about floppy disks internals? I will most likely
         move it here after the end of <a href="http://retrochallenge.org">Retrochallenge</a>.</p>
         <p>Yes, more m4 fun for all :D!</p>
-    </div>
+    </div> -->
 </div>
 
 <div id="side" role="complementary">
