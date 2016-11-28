@@ -21,9 +21,10 @@ However, one doesn't need to RE a significant portion of an IC to understand the
 Information about a chip's operation can be gleamed by examining small units, and predicting
 their relation to each other.</p>
 
-<p>Information on doing IC reverse-engineering is still kind of limited, although
-LINK(`https://siliconpr0n.org', `siliconpr0n') is changing that. Since I am learning
-how to RE ICs, I decided to document how I decoded a small ROM in the YM2151 that I <em>suspect</em> is
+<p>Information on doing IC reverse-engineering is still kind of limited, although projects like
+LINK(`https://siliconpr0n.org', `siliconpr0n') and whatever LINK(`http://www.righto.com/2014/10/how-z80s-registers-are-implemented-down.html', Ken Shirriff)
+is working on at any given time are changing that. Since I am learning how to RE ICs, I decided to
+ document how I decoded a small ROM in the YM2151 that I <em>suspect</em> is
 being used as part of the control state machine. This small ROM demonstrates
 the basics of REing ICs, including:</p>
 <ol>
