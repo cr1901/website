@@ -233,7 +233,7 @@ build/assets/img/nmos/%: assets/img/nmos/%
 ###########
 deploy:
 	$(MAKE)
-	pscp -r build/* freebsd@www.wdj-consulting.com:/usr/local/www/site
+	scp -r build/* freebsd@www.wdj-consulting.com:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 unstage:

@@ -62,8 +62,20 @@ ul {
     list-style-type: none;
 }
 
-#nav, #side, #undergirder {
+#nav, #side, #jumptop, #error-text {
     background-color: PRI_COLOR_3;
+}
+
+#error-text {
+    padding-top: 1em;
+}
+
+#error-text > p {
+    display: inline-block; /* Collapsing margins. */
+}
+
+#undergirder {
+    background: linear-gradient(PRI_COLOR_3, PRI_COLOR_2);
 }
 
 
@@ -110,6 +122,18 @@ ul {
     flex-basis: content;
 }
 
+#null-side {
+    padding: 0em;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: content;
+}
+
+
 #jumptop, #undergirder {
     text-align: center;
+}
+
+#undergirder > p {
+    display: inline-block; /* Collapsing margins. */
 }

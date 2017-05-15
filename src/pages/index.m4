@@ -3,7 +3,7 @@ define(`DATE', `<h1 class="date">$1</h1>')dnl
 <div id="main" role="main">
     <div class="intro">
         <p>Hello, my name is William Jones. I go by the handle <em>cr1901</em>
-        on most websites. I have a B.S. in electrical computer engineering (ECE),
+        on most websites. I have a B.Sc. in electrical computer engineering (ECE),
         and am currently freelancing. I am open to consulting work such as
         software programming, including adding features to open source code bases,
         and hardware design, such as verification of HDL using simulators or FPGAS.
@@ -43,7 +43,4 @@ define(`DATE', `<h1 class="date">$1</h1>')dnl
         move it here after the end of <a href="http://retrochallenge.org">Retrochallenge</a>.</p>
         <p>Yes, more m4 fun for all :D!</p>
     </div> -->
-</div>
-
-<div id="side" role="complementary">
 </div>
