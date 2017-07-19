@@ -233,7 +233,9 @@ build/assets/img/nmos/%: assets/img/nmos/%
 ###########
 deploy:
 	$(MAKE)
+	# This doesn't appear to be xferring the css correctly?
 	scp -r build/* freebsd@www.wdj-consulting.com:/usr/local/www/site
+	# scp build/assets/css/style.css freebsd@www.wdj-consulting.com:/usr/local/www/site/assets/css/style.css
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 unstage:
