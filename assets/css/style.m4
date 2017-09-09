@@ -26,7 +26,7 @@ dnl
 body {
     font-size: 1em;
     line-height: 1.4em;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Verdana";
     background-color: PRI_COLOR_2;
     color: TEXT_COLOR_1;
 }
@@ -62,7 +62,7 @@ ul {
     list-style-type: none;
 }
 
-#nav, #side, #jumptop, #error-text {
+#main, #nav, #side, #jumptop, #error-text {
     background-color: PRI_COLOR_3;
 }
 
@@ -105,13 +105,17 @@ ul {
         flex-direction: row;
     }
 
-    #main {
-        margin: 0em 1em;
-    }
-
     #me-img > img {
         max-width: 360px;
         max-height: auto;
+    }
+
+    /* #nav:first-child {
+        text-align: center;
+    } */
+
+    #nav h1 {
+        text-align: center;
     }
 }
 

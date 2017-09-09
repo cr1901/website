@@ -70,6 +70,8 @@ pretty_datetime = date +%d\ %b\ %H:%M:%S
 .PHONY: all localhref remotehref deploy unstage unbuild clean
 .INTERMEDIATE: $(make_page_staging) $(makefile_staging)
 
+# Get SSH_AUTH_SOCK for future use.
+$(eval $(shell ssh-pageant -r -a "/tmp/.ssh-pageant-$(USERNAME)"))
 
 ###########
 #  make   #
@@ -234,7 +236,7 @@ build/assets/img/nmos/%: assets/img/nmos/%
 deploy:
 	$(MAKE)
 	# This doesn't appear to be xferring the css correctly?
-	rsync -zlHxihrphtuhv build/ freebsd@wdj-consulting.com:/usr/local/www/site
+	SSH_AUTH_SOCK=$(SSH_AUTH_SOCK) rsync -zlHxihrphtuhv build/ freebsd@wdj-consulting.com:/usr/local/www/site
 	printf "($(shell $(pretty_datetime))) deployed build/\n"
 
 unstage:

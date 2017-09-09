@@ -55,7 +55,7 @@ and simulation, FPGA, and ASIC-compatible initial value instantiation. In additi
 generating vendor-independent Verilog, Migen provides a unified build system to target
 any supported FPGA development board. Adding a custom PCB is relatively simple, being
 very similar to writing a user-constraints file (UCF).</p>
-<p>Migen also provides useful clock-domain crossing and FIFO primitives as part of itsstandard library that I would
+<p>Migen also provides useful clock-domain crossing and FIFO primitives as part of its standard library that I would
 otherwise have to import from external HDL projects.</p>
 <p>My contributions to Migen include:
 <ul>
