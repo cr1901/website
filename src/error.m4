@@ -21,6 +21,8 @@
             img {
                 width: 100%;
                 max-width: 640px;
+                margin: auto;
+                display: block;
             }
 
             p {
@@ -30,6 +32,10 @@
             .text {
                 margin: 0 auto;
                 text-align: center;
+            }
+
+            #undergirder {
+                background: inherit;
             }
         </style>
     </head>

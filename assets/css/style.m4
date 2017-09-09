@@ -67,7 +67,7 @@ ul {
     list-style-type: none;
 }
 
-#main, #nav, #side, #jumptop, #error-text {
+#main, #nav, #side, #jumptop {
     background-color: PRI_COLOR_3;
 }
 
