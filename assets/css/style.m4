@@ -84,8 +84,16 @@ ul {
         flex-direction: column;
     }
 
-    #nav:first-child {
-        content: " Consulting"
+    /* #nav:first-child {
+        content: " Consulting";
+    } */
+
+    #nav h1::after {
+        content: " Consulting";
+    }
+
+    #main {
+        padding: 0 1em;
     }
 
     #nav li {
@@ -97,6 +105,15 @@ ul {
     p.aside {
         float: none;
         width: auto;
+    }
+
+    /* Why does this work again? Headings too compact without it... */
+    h1 {
+        line-height: 1.0em;
+    }
+
+    ul {
+        list-style-type: circle;
     }
 }
 
