@@ -37,6 +37,11 @@ img {
 
 table {
     margin: 2em auto;
+    min-width: 80%;
+}
+
+caption {
+    text-align: left;
 }
 
 h1, h2, h3 {

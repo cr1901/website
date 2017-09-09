@@ -8,6 +8,7 @@ define(`SCHEM', `<figure>
 <img src="/assets/img/nmos/NMOS-RE-Sample_$1.png">
 <figcaption>$2</figcaption>
 </figure>')
+define(`SUB', `$1<sub>$2</sub>')
 
 define(`TR', `<tr><td>$1</td><td>$2</td></tr>')
 <!-- TODO: O_-->
@@ -328,16 +329,16 @@ table for the entire ROM!</p>
 <caption>Output Bits Driven Low For Each Input Bus Line</caption>
 <thead>TR(Bus Line+Value, Output Bits Driven Low)</thead>
 <tbody>
-TR(`I_0 High',  `O_1, O_6, O_7')
-TR(`I_0 Low',  `O_0, O_5, O_8, O_9')
-TR(`I_1 High',  `O_0, O_3, O_6, O_7')
-TR(`I_1 Low',  `O_1, O_4, O_5, O_8, O_9')
-TR(`I_2 High',  `O_2, O_5')
-TR(`I_2 Low',  `O_0, O_1, O_3, O_4, O_6, O_7, O_8, O_9')
-TR(`I_3 High',  `O_1, O_2, O_3, O_6, O_7')
-TR(`I_3 Low',  `O_0, O_4, O_5, O_8, O_9')
-TR(`I_4 High',  `O_6')
-TR(`I_4 Low',  `O_0')
+TR(`SUB(I,0) High',  `SUB(O,1), SUB(O,6), SUB(O,7)')
+TR(`SUB(I,0) Low',  `SUB(O,0), SUB(O,5), SUB(O,8), SUB(O,9)')
+TR(`SUB(I,1) High',  `SUB(O,0), SUB(O,3), SUB(O,6), SUB(O,7)')
+TR(`SUB(I,1) Low',  `SUB(O,1), SUB(O,4), SUB(O,5), SUB(O,8), SUB(O,9)')
+TR(`SUB(I,2) High',  `SUB(O,2), SUB(O,5)')
+TR(`SUB(I,2) Low',  `SUB(O,0), SUB(O,1), SUB(O,3), SUB(O,4), SUB(O,6), SUB(O,7), SUB(O,8), SUB(O,9)')
+TR(`SUB(I,3) High',  `SUB(O,1), SUB(O,2), SUB(O,3), SUB(O,6), SUB(O,7)')
+TR(`SUB(I,3) Low',  `SUB(O,0), SUB(O,4), SUB(O,5), SUB(O,8), SUB(O,9)')
+TR(`SUB(I,4) High',  `SUB(O,6)')
+TR(`SUB(I,4) Low',  `SUB(O,0)')
 </tbody>
 </table>
 
@@ -345,16 +346,16 @@ TR(`I_4 Low',  `O_0')
 <caption>Output Bus Line Equations</caption>
 <thead>TR(Bus Line, Boolean Expression)</thead>
 <tbody>
-TR(`O_0', `~(~I_0 | I_1 | ~I_2 | ~I_3 | ~I_4)')
-TR(`O_1', `~(I_0 | ~I_1 | ~I_2 | I_3)')
-TR(`O_2', `~(I_2 | I_3)')
-TR(`O_3', `~(I_1 | ~I_2 | I_3)')
-TR(`O_4', `~(~I_1 | ~I_2 | ~I_3)')
-TR(`O_5', `~(~I_0 | ~I_1 | I_2 | ~I_3)'')
-TR(`O_6', `~(I_0 | I_1 | ~I_2 | I_3 | I_4)')
-TR(`O_7', `~(I_0 | I_1 | ~I_2 | I_3)')
-TR(`O_8', `~(I_0 | ~I_1 | ~I_2 | ~I_3)')
-TR(`O_9', `~(I_0 | ~I_1 | ~I_2 | ~I_3)')
+TR(`SUB(O,0)', `~(~SUB(I,0) | SUB(I,1) | ~SUB(I,2) | ~SUB(I,3) | ~SUB(I,4))')
+TR(`SUB(O,1)', `~(SUB(I,0) | ~SUB(I,1) | ~SUB(I,2) | SUB(I,3))')
+TR(`SUB(O,2)', `~(SUB(I,2) | SUB(I,3))')
+TR(`SUB(O,3)', `~(SUB(I,1) | ~SUB(I,2) | SUB(I,3))')
+TR(`SUB(O,4)', `~(~SUB(I,1) | ~SUB(I,2) | ~SUB(I,3))')
+TR(`SUB(O,5)', `~(~SUB(I,0) | ~SUB(I,1) | SUB(I,2) | ~SUB(I,3))'')
+TR(`SUB(O,6)', `~(SUB(I,0) | SUB(I,1) | ~SUB(I,2) | SUB(I,3) | SUB(I,4))')
+TR(`SUB(O,7)', `~(SUB(I,0) | SUB(I,1) | ~SUB(I,2) | SUB(I,3))')
+TR(`SUB(O,8)', `~(SUB(I,0) | ~SUB(I,1) | ~SUB(I,2) | ~SUB(I,3))')
+TR(`SUB(O,9)', `~(SUB(I,0) | ~SUB(I,1) | ~SUB(I,2) | ~SUB(I,3))')
 </tbody>
 </table>
 
