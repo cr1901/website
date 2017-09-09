@@ -29,6 +29,7 @@ define(`LIST_HEADER', <dt><span class="contact-key">$1</span></dt>)dnl
         <dl>
             <dt class="contact-key">Email</dt>
             <dd><a href="mailto:thor0505@comcast.net">Personal</a></dd>
+            <dd><a href="mailto:wjones@wdj-consulting.com">Business</a></dd>
         </dl>
         <dl>
             <dt class="contact-key">Keybase</dt>
