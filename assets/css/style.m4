@@ -1,6 +1,4 @@
-dnl/* vim: ft=css */
-dnl/* -*- mode: css -*- */
-dnl
+dnl -*- mode: css -*-
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=13z0u0k8su61LPO4GD1cVpwhPlc */
@@ -63,8 +61,18 @@ a:visited {
     color: COMP_COLOR_2;
 }
 
+/* I almost always use pre for code. */
+pre {
+    overflow-x: auto;
+}
+
+/* Make code blocks look nice within a list */
+li > pre {
+    margin-top: 0;
+}
+
 ul {
-    list-style-type: none;
+    list-style-type: circle;
 }
 
 #main, #nav, #side, #jumptop {
@@ -115,10 +123,6 @@ ul {
     /* Why does this work again? Headings too compact without it... */
     h1 {
         line-height: 1.0em;
-    }
-
-    ul {
-        list-style-type: circle;
     }
 }
 

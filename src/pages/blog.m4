@@ -8,6 +8,13 @@ dnl    include(blog/$1.m4)')dnl
     that tickle my fancy. As one might guess from the name, I have a tendency
     to uncomfortably mix the old with the new.</p>
 
+    <div id=9-2017>
+        <h1 class="date">September 2017</h1>
+        <ul class="blog_list">
+            DEAD_POST(`migen-port', `Porting a New Board To Migen')
+        </ul>
+    </div>
+
     <div id=10-2016>
         <h1 class="date">October 2016</h1>
         <ul class="blog_list">
@@ -35,7 +42,7 @@ dnl    include(blog/$1.m4)')dnl
         <h1 class="date">February 2016</h1>
         <ul class="blog_list">
             POST(`floppy-intro', `Floppy Disk Primer I: Overview')
-            dnl POST(`floppy-lit', `Floppy Disk Primer Nulla: Literature')
+            POST(`floppy-lit', `Floppy Disk Primer Nulla: Literature')
         </ul>
     </div>
 </div>
