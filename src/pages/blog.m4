@@ -11,7 +11,7 @@ dnl    include(blog/$1.m4)')dnl
     <div id=9-2017>
         <h1 class="date">September 2017</h1>
         <ul class="blog_list">
-            DEAD_POST(`migen-port', `Porting a New Board To Migen')
+            POST(`migen-port', `Porting a New Board To Migen')
         </ul>
     </div>
 

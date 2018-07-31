@@ -1,5 +1,6 @@
 dnl -*- mode: html -*-
-debugmode(`lt')
+dnl https://pastebin.com/tpC6M4K6
+dnl debugmode(`lt')
 define(`HERE', `')
 define(`_I', <s class="italics">$1</s>)
 define(`LINK', <a href="$1">$2</a>)
@@ -56,7 +57,8 @@ to having generated Verilog <em>and then</em> generating the synthesis file form
 from the Verilog; this is nontrivial.
 </ol>
 
-<p>The Migen manual discusses its rationale for existing, but the important
+<p>The LINK(https://media.readthedocs.org/pdf/mithro-migen/latest/mithro-migen.pdf, Migen manual)
+discusses its rationale for existing, but the important
 reasons that apply to me personally are that Migen:</p>
 <ul>
 <li>Avoids simulation-synthesis
@@ -74,7 +76,7 @@ this increases code clarity.</li>
 
 <p>As an added bonus, I can write
 a Migen design once and, within reason, generate a bitstream of my design
-without needing a separate User-Constraints File (UCF) for each board that Migen
+without needing a separate User Constraints File (UCF) for each board that Migen
 supports. This facilitates design reuse by others who may not have the same
 board as I do, but has a new board with the required I/O peripherals anyway.</p>
 
@@ -106,23 +108,22 @@ explain each section:</p>
 
 <pre><code id="rot">from migen import *
 from migen.build.platforms import icestick
-from migen.fhdl import verilog
 
-class rot(Module):
+class Rot(Module):
     def __init__(self):
         self.clk_freq = 12000000
-        self.ready = Signal(1)
+        self.ready = Signal()
         self.rot = Signal(4)
         self.divider = Signal(max=self.clk_freq)
-        self.D1 = Signal(1)
-        self.D2 = Signal(1)
-        self.D3 = Signal(1)
-        self.D4 = Signal(1)
-        self.D5 = Signal(1)
+        self.d1 = Signal()
+        self.d2 = Signal()
+        self.d3 = Signal()
+        self.d4 = Signal()
+        self.d5 = Signal()
 
         ###
-        self.comb += [j.eq(self.rot[i]) for i, j in enumerate([self.D1, self.D2, self.D3, self.D4])]
-        self.comb += [self.D5.eq(1)]
+        self.comb += [j.eq(self.rot[i]) for i, j in enumerate([self.d1, self.d2, self.d3, self.d4])]
+        self.comb += [self.d5.eq(1)]
 
         self.sync += [
             If(self.ready,
@@ -154,7 +155,7 @@ contains all the FPGA development platforms Migen supports; the goal of this blo
 will be to reimplement the LINK(http://www.latticesemi.com/icestick, iCEstick)
 development board for use from Migen.</p></li>
 
-<li>CODE_BLOCK(`class rot(Module):')
+<li>CODE_BLOCK(`class Rot(Module):')
 <p>A CODE(Module) is the basic unit describing digital behavior in Migen. Connections
 between CODE(Module)s are typically made by declaring instance variables that
 can be shared between CODE(Modules), and using CODE(submodules). Submodule syntax
@@ -175,14 +176,15 @@ is expected to take, and Migen will initialize its width to CODE(log2(max) + 1).
 <em>However, nothing prevents the signal from exceeding max when run in a simulator or FPGA.</em></p></li>
 
 <li>CODE_BLOCK(`###
-self.comb += [j.eq(self.rot[i]) for i, j in enumerate([self.D1, self.D2, self.D3, self.D4])]
+self.comb += [j.eq(self.rot[i]) for i, j in enumerate([self.d1, self.d2, self.d3, self.d4])]
 
 ')
 <p>By convention, data-type declarations are separated from code describing how code
 should behave using CODE(`###'). Migen statements relating connections of
 CODE(`Signal')s and other data
 types must be appended to either a CODE(comb) or CODE(sync) attribute. Connections are
-typically made using the CODE(eq) function of CODE(Signal)s.</p>
+typically made using the CODE(eq) function of CODE(Signal)s. Python's slice notation
+accesses individual or subsets of bits of a CODE(Signal).</p>
 
 <p>CODE(comb), or
 combinationial, statements are analogous to Verilog's CODE(assign) keyword or combinational CODE(`always @(*)')
@@ -231,8 +233,8 @@ features (and behavior) not mentioned in the manual in a follow-up post.</p>
 <p>The LINK(`#rot', above code) was adapted from the
 LINK(`https://github.com/cseed/arachne-pnr/tree/master/examples/rot', rot.v)
 example of Arachne PNR. In words, the above code turns on an LED, counts for 12,000,000
-clock cycles, then turns off the previous LED and lights another of 4 LEDs. After 4 LEDs
-the cycle repeats; a fifth LED is always kept on as soon as the FPGA loads its
+clock cycles, then turns off the previous LED and lights another of 4 LEDs; after 4 LEDs
+the cycle repeats. A fifth LED is always kept on as soon as the FPGA loads its
 bitstream.</p>
 
 <p>Our goal is to get this simple Migen design to work on a new FPGA development board,
@@ -255,13 +257,13 @@ but the CODE(icestick.py) board file does not.</p>
 <h3>We Need a Constraints File</h3>
 <p>Before I can start writing a board file for iCEstick, we need to know which
 FPGA pins are connected to what. For many boards, the manufacturer will provide
-a full User-Constraints File (UCF) with this information. For demonstrative purposes`'FN(4)
+a full User Constraints File (UCF) with this information. For demonstrative purposes`'FN(4)
 however, I will examine the schematic diagram of iCEstick instead to create
 my Migen board file. This can be found in a file provided by Lattice at a
 changing URL called "icestickusermanual.pdf".</p>
 
-<p>We need to know the format of FPGA PIN identifiers that Arachne PNR, the
-place-and-route tool for IceStorm will expect as well. The format differs for
+<p>We need to know the format of FPGA pin identifiers that Arachne PNR, the
+place-and-route tool for IceStorm, will expect as well. The format differs for
 each of the FPGA manufacturers and even between FPGA families of the same
 manufacturer; Xilinx, for example uses CODE([A-Z]?[0-9]*), as does the Lattice
 ECP3 family. Fortunately, IceStorm uses pin numbers that correspond to the device
@@ -383,7 +385,7 @@ Of course, timing constraints and other User Constraints File data can be added 
 your design manually using CODE(GenericPlatform.add_period_constraint) and
 CODE(GenericPlatform.add_platform_command) respectively.</p>
 
-<p>IceStick does not have any peripherals which need special constraints, and only
+<p>iCEStick does not have any peripherals which need special constraints, and only
 a single clock; Migen will automatically add a constraint for the default clock.
 More importantly, in the case of IceStorm/iCEStick, only a global clock constraint
 is supported due to limitations in specifying constraints. Therefore, I omit the CODE(do_finalize)
@@ -417,7 +419,7 @@ tuple entries are used to create inputs and output names in the Migen-generated 
 provide a variable-name to FPGA pin mapping in a Migen-generated User Constraints File (UCF)</p>
 
 <p>Without going into excess detail`'FN(6),
-CODE(Subsignals) are a helper class to for resources
+CODE(Subsignals) are a helper class for resources
 that use FPGA pins which can be seperated cleanly by purpose. The inputs to a CODE(Subsignal)
 constructor are identical to an I/O tuple entry, except with CODE(id) omitted. The net effect
 for the end user is that a resource is encapsulated as a class whose Migen CODE(Signals)
@@ -450,10 +452,10 @@ Ideally, the pins should be listed in some order that makes sense for the connec
 the CODE(Platform) via the CODE(request) method. Instead, a user needs to
 notify the platform that they wish to use the connector as extra I/O using
 the CODE(GenericPlatform.add_extension) method. Here is an example adding a
-LINK(`PMOD I2C peripheral', https://blog.digilentinc.com/new-i2c-standard-for-pmods/)
+LINK(https://blog.digilentinc.com/new-i2c-standard-for-pmods/, PMOD I2C peripheral)
 using CODE(add_extension):</p>
 
-CODE_BLOCK(my_i2c_device = [
+CODE_BLOCK(`my_i2c_device = [
     ("i2c_device", 0,
         Subsignal("sdc", Pins("PMOD:2"), Misc("PULLUP")),
         Subsignal("sda", Pins("PMOD:3"), Misc("PULLUP"))
@@ -475,10 +477,10 @@ CODE(_io) and CODE(_connectors) list for our Platform. Each listed peripheral
 is implied to be a tuple inside CODE(_io = [...] or _connectors = [...]):
 
 CODE_BLOCK(`("user_led", 0, Pins("99"), IOStandard("LVCMOS33")),
-    ("user_led", 1, Pins("98"), IOStandard("LVCMOS33")),
-    ("user_led", 2, Pins("97"), IOStandard("LVCMOS33")),
-    ("user_led", 3, Pins("96"), IOStandard("LVCMOS33")),
-    ("user_led", 4, Pins("95"), IOStandard("LVCMOS33")),')
+("user_led", 1, Pins("98"), IOStandard("LVCMOS33")),
+("user_led", 2, Pins("97"), IOStandard("LVCMOS33")),
+("user_led", 3, Pins("96"), IOStandard("LVCMOS33")),
+("user_led", 4, Pins("95"), IOStandard("LVCMOS33")),')
 
 <p>CODE(user_led)s are simple peripherals found on just about every development
 board; iCEStick has 5 of them, all identical in function (but the 5th one is green!).
@@ -492,40 +494,41 @@ CODE(serial.tx), CODE(spiflash), and CODE(audio) are all commonly-used I/O names
 used between board files.</p>
 
 CODE_BLOCK(`("serial", 0,
-        Subsignal("rx", Pins("9")),
-        Subsignal("tx", Pins("8"), Misc("PULLUP")),
-        Subsignal("rts", Pins("7"), Misc("PULLUP")),
-        Subsignal("cts", Pins("4"), Misc("PULLUP")),
-        Subsignal("dtr", Pins("3"), Misc("PULLUP")),
-        Subsignal("dsr", Pins("2"), Misc("PULLUP")),
-        Subsignal("dcd", Pins("1"), Misc("PULLUP")),
-        IOStandard("LVTTL"),
-    ),')
+    Subsignal("rx", Pins("9")),
+    Subsignal("tx", Pins("8"), Misc("PULLUP")),
+    Subsignal("rts", Pins("7"), Misc("PULLUP")),
+    Subsignal("cts", Pins("4"), Misc("PULLUP")),
+    Subsignal("dtr", Pins("3"), Misc("PULLUP")),
+    Subsignal("dsr", Pins("2"), Misc("PULLUP")),
+    Subsignal("dcd", Pins("1"), Misc("PULLUP")),
+    IOStandard("LVTTL"),
+),')
 
 <p>Next we have another common peripheral- a UART/serial port. A UART peripheral
 makes sense to divide using CODE(Subsignal)s, since each pin has a distinct purpose.
 Although in practice most users will only use CODE(rx) and CODE(tx)`'FN(7), I include all
 possible pins just in case. I don't remember why I included CODE(PULLUP) as
-user constraints information. Note that it's perfectly okay to associate a constraint
-with all CODE(Subsignal)s at once, as I do for the (unused) CODE(IOStandard).
+constraints information for a majority of pins. Note that it's perfectly okay
+to associate a constraint with all CODE(Subsignal)s at once, as I do for the
+(unused) CODE(IOStandard).
 
 CODE_BLOCK(`("irda", 0,
-        Subsignal("rx", Pins("106")),
-        Subsignal("tx", Pins("105")),
-        Subsignal("sd", Pins("107")),
-        IOStandard("LVCMOS33")
-    ),')
+    Subsignal("rx", Pins("106")),
+    Subsignal("tx", Pins("105")),
+    Subsignal("sd", Pins("107")),
+    IOStandard("LVCMOS33")
+),')
 
 <p>The infrared port on iCEStick is another serial port, sans most of the
 control signals. I omit the optional I/O tuple/CODE(Subsignal) entries here, and
 define the CODE(IOStandard) similarly to the previous CODE(serial) peripheral.</p>
 
 CODE_BLOCK(`("spiflash", 0,
-        Subsignal("cs_n", Pins("71"), IOStandard("LVCMOS33")),
-        Subsignal("clk", Pins("70"), IOStandard("LVCMOS33")),
-        Subsignal("mosi", Pins("67"), IOStandard("LVCMOS33")),
-        Subsignal("miso", Pins("68"), IOStandard("LVCMOS33"))
-    ),')
+    Subsignal("cs_n", Pins("71"), IOStandard("LVCMOS33")),
+    Subsignal("clk", Pins("70"), IOStandard("LVCMOS33")),
+    Subsignal("mosi", Pins("67"), IOStandard("LVCMOS33")),
+    Subsignal("miso", Pins("68"), IOStandard("LVCMOS33"))
+),')
 
 <p>CODE(spiflash) and its CODE(Subsignal) have standardized, self-explanatory names.
 I suggest using these signal names when appropriate for all peripherals connected
@@ -534,7 +537,7 @@ I don't remember why I added the CODE(IOStandard) per-signal instead of all-at-o
 but the net effect would be the same either way if IceStorm made use of CODE(IOStandard).</p>
 
 
-CODE_BLOCK(`("clk12", 0, Pins("21"), IOStandard("LVCMOS33"))')
+CODE_BLOCK(`("clk12", 0, Pins("21"), IOStandard("LVCMOS33")),')
 
 <p>Clock signals should be included as well, with at least one clock's CODE(io_name)
 matching the CODE(default_clk_name). Migen may automatically CODE(request) a clock
@@ -542,49 +545,49 @@ for your design if certain conditions are met; for now, assume you don't have
 to CODE(request) the clock.</p>
 
 CODE_BLOCK(`("GPIO0", "44 45 47 48 56 60 61 62"),
-    ("GPIO1", "119 118 117 116 115 114 113 112"),
-    ("PMOD", "78 79 80 81 87 88 90 91")
-]')
+("GPIO1", "119 118 117 116 115 114 113 112"),
+("PMOD", "78 79 80 81 87 88 90 91"),
+')
 
 <p>And lastly we have the connectors. The connector pins for CODE(GPIO0-1) and
 CODE(PMOD) are ordered in increasing pin order, which matches the order they
 are laid out on their respective connectors. <em>This is a happy coincidence. Make sure
-to check your schematic and order FPGA pins in connector order, not the other
+to check your schematic and declare FPGA pins in connector order, not the other
 way around!</em></p>
 </p>
 
 
 <h2>Building Our Design For Our "New" Board</h2>
 <p>Now that we have created our board file, we now need to write the remaining
-logic to attach the board's I/O to our <a href="#rot">rot top level</a>. Assuming
-the CODE(rot) module is already defined, we can create a script that will synthesize
+logic to attach the board's I/O to our <a href="#rot">Rot top level</a>. Assuming
+the CODE(Rot) module is already defined, we can create a script that will synthesize
 our design like so:</p>
 
 CODE_BLOCK(`if __name__ == "__main__":
     plat = icestick.Platform()
-    m = rot()
-    m.comb += [plat.request("user_led").eq(m.D1) for l in [m.D1, m.D2, m.D3, m.D4, m.D5]]
+    m = Rot()
+    m.comb += [plat.request("user_led").eq(m.d1) for l in [m.d1, m.d2, m.d3, m.d4, m.d5]]
     plat.build(m, run=True, build_dir="rot", build_name="rot_migen")
-    # plat.create_programmer().flash(0, "rot/rot_migen.bin")')
+    plat.create_programmer().flash(0, "rot/rot_migen.bin")')
 
-<p>Once again, I will explain each line. It should be appended to the rot top level
+<p>Once again, I will explain each line. It should be appended to the CODE(Rot) top level
 and then run using your Python 3 interpreter:</p>
 
 <ul>
 <li>CODE_BLOCK(`plat = icestick.Platform()
-m = rot()')
-<p>We create our platform and our rot module here. CODE(plat) contains a number
+m = Rot()')
+<p>We create our platform and our CODE(Rot) module here. CODE(plat) contains a number
 of useful helper methods that help customize what is eventually sent to the
 synthesis flow.</p></li>
 
-<li>CODE_BLOCK(`m.comb += [plat.request("user_led").eq(m.D1) for l in [m.D1, m.D2, m.D3, m.D4, m.D5]]
+<li>CODE_BLOCK(`m.comb += [plat.request("user_led").eq(m.d1) for l in [m.d1, m.d2, m.d3, m.d4, m.d5]]
 
 ')
 <p>This list comprehension is how we actually connect our I/O to the LED rotation module.
 CODE(`plat.request("user_led")') will create a Migen CODE(Signal) or CODE(Record) which
 can be used to assign to CODE(Signals) and CODE(Records) in an existing CODE(Module).
 CODE(GenericPlatform) does bookkeeping to figure out which CODE(Signals) should be considered
-I/Os from the generated Verilog top level (and consequently, mapped to a User Constraints
+I/Os to/from the generated Verilog top level (and consequently, mapped to a User Constraints
 File).</p>
 <p>Repeatedly calling CODE(request) for a given resource
 name will return a new CODE(Signal) or CODE(Record) of the same type, throwing a
@@ -593,13 +596,13 @@ CODE(ConstraintError) exception if there are no more available resources.</p></l
 <li>CODE_BLOCK(`plat.build(m, run=True, build_dir="rot", build_name="rot_migen")
 
 ')
-<p>The CODE(GenericPlatform.build) function will emit Verilog output, a User Constraint File
+<p>The CODE(GenericPlatform.build) function will emit Verilog output, a User Constraints File
 specific to your design, a batch file or shell script to invoke the synthesis flow, and any
 other files required as input to the synthesis toolchain. Optionally, Migen will invoke
 the generated script to create your design if input argument CODE(run) is true.
 CODE(build_dir) is self-explanatory, and CODE(build_name) controls the filename
 of generated files.</p>
-<p>I pass in my top level CODE(rot) CODE(Module) to the CODE(build) function.
+<p>I pass in my top level CODE(Rot) CODE(Module) to the CODE(build) function.
 CODE(GenericPlatform) has internal logic to detect which signals were declared as
 I/O in the board file while generating Verilog input and output arguments.</p></li>
 
@@ -614,9 +617,13 @@ from CODE(build_name) and the toolchain's default extension for bitstreams.</p><
 </ul>
 
 <p>If all goes well, and you were following along, you should now have a blinking
-LED example on your iCEStick! The final iCEStick platform board file is here,
-which you can use as a reference, and I've made the CODE(rot) top level available
-as a gist.</p>
+LED example on your iCEStick! The final iCEStick platform board file is
+LINK(https://github.com/m-labs/migen/blob/master/migen/build/platforms/icestick.py, here),
+which you can use as a reference, and I've made the CODE(Rot) top level available
+as a LINK(https://gist.github.com/cr1901/afc0442405fa4727802182ff9eac0e84, gist).
+Take a look at the output files Migen generated, including the output
+Verilog and User Constraints File, to get a feel of how our "shiny new" board file
+was used!</p>
 
 <h2>Happy Hacking!</h2>
 <p>If you have read up to this point, you now have some grasp on the Migen
@@ -636,6 +643,11 @@ same in Verilog alone!`'FN(8)</p>
 <p>Migen is certainly a step in the right direction for the future of hacking with
 FPGAs, and I hope you as the reader give it a try with your Shiny New Development
 Board like I did, and see whether your experiences were as positive as mine.</p>
+
+<h2>Acknowledgements</h2>
+<p>I'd like to thank LINK(https://twitter.com/m_labs_ltd, Sébastien Bourdeauducq),
+the primary architect and maintainer of Migen, for looking over an initial version
+of this post and offering feedback.</p>
 
 <h2>Footnotes</h2>
 FN_TARGET(1, `For better or worse, emitting Verilog requires someone intimately
@@ -670,6 +682,4 @@ and RX, and possibly RTS/CTS. But alas, there''`s still not enough control conne
 to use queue mode.')
 FN_TARGET(8, `Portability of code gives me joy, and HDL portability
 is no exception.')
-
-<!-- <p>The t -->
 </div>
