@@ -8,6 +8,13 @@ dnl    include(blog/$1.m4)')dnl
     that tickle my fancy. As one might guess from the name, I have a tendency
     to uncomfortably mix the old with the new.</p>
 
+    <div id=8-2018>
+        <h1 class="date">August 2018</h1>
+        <ul class="blog_list">
+            DEAD_POST(`rpi-ppp', `Internet Access Using A Raspberry Pi''`s Serial Port')
+        </ul>
+    </div>
+
     <div id=9-2017>
         <h1 class="date">September 2017</h1>
         <ul class="blog_list">
@@ -22,6 +29,7 @@ dnl    include(blog/$1.m4)')dnl
         </ul>
     </div>
 
+divert(-1)dnl
     <div id=8-2016>
         <h1 class="date">August 2016</h1>
         <ul class="blog_list">
@@ -37,6 +45,7 @@ dnl    include(blog/$1.m4)')dnl
             DEAD_POST(`floppy-tf', `Floppy Disk Primer II: R/W Head Transfer Function')
         </ul>
     </div>
+divert(0)dnl
 
     <div id=2-2016>
         <h1 class="date">February 2016</h1>
@@ -46,5 +55,6 @@ dnl    include(blog/$1.m4)')dnl
         </ul>
     </div>
 </div>
+
 
 xBLOGNAV

@@ -5,10 +5,13 @@ define(`DEAD_POST', `<li>$2</li>')dnl
 
 <div id="side" role="complementary">
     <ul>
+        MONTH(8, 2018)
         MONTH(9, 2017)
         MONTH(10, 2016)
+divert(-1)dnl
         MONTH(8, 2016)
         MONTH(4, 2016)
+divert(0)dnl
         MONTH(2, 2016)
     </ul>
 divert(-1)dnl
